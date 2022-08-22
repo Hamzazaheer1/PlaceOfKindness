@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
 import "./Login.css";
 
 const Login = () => {
+  const auth = useContext(AuthContext);
   return (
     <React.Fragment>
       <div className="login-div">
@@ -27,7 +29,12 @@ const Login = () => {
                   required
                 />
               </div>
-              <input type="submit" name="" value="login" />
+              <input
+                type="submit"
+                name=""
+                value="Sign in"
+                onClick={auth.login}
+              />
             </form>
           </div>
         </div>

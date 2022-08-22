@@ -1,13 +1,14 @@
 import React from "react";
+import "./Signup.css";
 
 const Signup = () => {
   return (
     <React.Fragment>
       <React.Fragment>
         <div className="login-div">
-          <div className="main_div">
-            <div className="box">
-              <h1>Sign in Here</h1>
+          <div className="signup-_main_div">
+            <div className="signup-box">
+              <h1>Sign up Here</h1>
               <form method="" action="">
                 <div className="inputBox">
                   <label>name</label>
@@ -48,11 +49,20 @@ const Signup = () => {
                   <label>role</label>
                   <input type="text" name="role" autoComplete="off" required />
                 </div>
-                <input type="submit" name="" value="login" />
+                <input type="submit" name="" value="Sign up" />
               </form>
             </div>
           </div>
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <br />
       </React.Fragment>
     </React.Fragment>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
 import "./MyNavbar.css";
 
 const MyNavbar = () => {
+  const auth = useContext(AuthContext);
   return (
     <nav>
       <div class="logo">
@@ -29,14 +31,34 @@ const MyNavbar = () => {
         <li>
           <Link to="/request">Request</Link>
         </li>
+        {auth.isLoggedIn && (
+          <li>
+            <Link to="/admindash">UserDash</Link>
+          </li>
+        )}
+        {auth.isLoggedIn && (
+          <li>
+            <Link to="/userdash">AdminDash</Link>
+          </li>
+        )}
       </div>
-      <div class="nav-items" style={{ paddingLeft: "70rem" }}>
-        <li>
-          <Link to="/login">Sign in</Link>
-        </li>
-        <li>
-          <Link to="/signup">Sign up</Link>
-        </li>
+      {/* paddingLeft 70rem after removal of dash */}
+      <div class="nav-items" style={{ paddingLeft: "55rem" }}>
+        {!auth.isLoggedIn && (
+          <li>
+            <Link to="/login">Sign in</Link>
+          </li>
+        )}
+        {!auth.isLoggedIn && (
+          <li>
+            <Link to="/signup">Sign up</Link>
+          </li>
+        )}
+        {auth.isLoggedIn && (
+          <li>
+            <button onClick={auth.logout}>Logout</button>
+          </li>
+        )}
       </div>
     </nav>
   );
