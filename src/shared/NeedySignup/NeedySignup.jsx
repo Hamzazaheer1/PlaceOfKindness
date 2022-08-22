@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Signup.css";
 
 const Signup = () => {
   const [name, setName] = useState(null);
@@ -7,12 +6,13 @@ const Signup = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [passwordConfirm, setPasswordConfirm] = useState(null);
+  const [cnic, setCnic] = useState(null);
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch(
-        "https://placeofkindness-server.herokuapp.com/api/v1/users/signup",
+        "https://placeofkindness-server.herokuapp.com/api/v1/users/signupneedy",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -22,7 +22,8 @@ const Signup = () => {
             username: username,
             password: password,
             passwordConfirm: passwordConfirm,
-            role: "donator",
+            role: "needy",
+            cnic: cnic,
           }),
         }
       );
@@ -98,6 +99,16 @@ const Signup = () => {
                     autoComplete="off"
                     required
                     onChange={(e) => setPasswordConfirm(e.target.value)}
+                  />
+                </div>
+                <div className="inputBox">
+                  <label>CNIC</label>
+                  <input
+                    type="text"
+                    name="cnic"
+                    autoComplete="off"
+                    required
+                    onChange={(e) => setCnic(e.target.value)}
                   />
                 </div>
               </form>
