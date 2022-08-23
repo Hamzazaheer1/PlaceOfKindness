@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./TopDonations.css";
 
 const TopDonations = () => {
+  const [data, setData] = useState([]);
+  let response;
+  let responseData;
+  const getDonors = async () => {
+    response = await fetch(
+      "https://placeofkindness-server.herokuapp.com/api/v1/donations/top5don"
+    );
+    responseData = await response.json();
+    setData(responseData.users);
+  };
+
+  useEffect(() => {
+    getDonors();
+  }, []);
+
+  // console.log(data[0].photo[0]);
+
   return (
     <React.Fragment>
       <h2 className="top-donors-h2">Our Top Donations.</h2>
@@ -13,45 +30,17 @@ const TopDonations = () => {
               <th>Profile</th>
               <th>Name</th>
               <th>Donation Amount</th>
-              <th>Donation Type</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Cell 1</td>
-              <td>Cell 2</td>
-              <td>Cell 3</td>
-              <td>Cell 4</td>
-              <td>Cell 5</td>
-            </tr>
-            <tr>
-              <td>Cell 1</td>
-              <td>Cell 2</td>
-              <td>Cell 3</td>
-              <td>Cell 4</td>
-              <td>Cell 5</td>
-            </tr>
-            <tr>
-              <td>Cell 1</td>
-              <td>Cell 2</td>
-              <td>Cell 3</td>
-              <td>Cell 4</td>
-              <td>Cell 5</td>
-            </tr>
-            <tr>
-              <td>Cell 1</td>
-              <td>Cell 2</td>
-              <td>Cell 3</td>
-              <td>Cell 4</td>
-              <td>Cell 5</td>
-            </tr>
-            <tr>
-              <td>Cell 1</td>
-              <td>Cell 2</td>
-              <td>Cell 3</td>
-              <td>Cell 4</td>
-              <td>Cell 5</td>
-            </tr>
+            {data.map((item, index) => (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{item.photo}</td>
+                <td>{item.Name}</td>
+                <td>{item.donated}$</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

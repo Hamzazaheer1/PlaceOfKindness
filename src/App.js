@@ -19,7 +19,6 @@ import SignupDash from "./shared/SignupDash/SignupDash";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const login = useCallback(() => {
     setIsLoggedIn(true);
   }, []);
