@@ -12,7 +12,7 @@
 
 }
 
-.box {
+.login-box {
     width: 400px;
     position: absolute;
     top: 50%;
@@ -23,18 +23,18 @@
     border-radius: 10px;
 }
 
-.box h1 {
+.login-box h1 {
     margin-bottom: 30px;
     color: white;
     text-align: center;
     text-transform: capitalize;
 }
 
-.box .inputBox {
+.login-box .inputBox {
     position: relative;
 }
 
-.box .inputBox input {
+.login-box .inputBox input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -47,11 +47,11 @@
     outline: none;
 }
 
-.box .inputBox label {
+.login-box .inputBox label {
     color: white;
 } 
 
-.box input[type="submit"] {
+.login-box input[type="submit"] {
     background-color: transparent;
     border: none;
     outline: none;

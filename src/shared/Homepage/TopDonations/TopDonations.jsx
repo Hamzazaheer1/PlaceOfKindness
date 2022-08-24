@@ -17,8 +17,6 @@ const TopDonations = () => {
     getDonors();
   }, []);
 
-  // console.log(data[0].photo[0]);
-
   return (
     <React.Fragment>
       <h2 className="top-donors-h2">Our Top Donations.</h2>

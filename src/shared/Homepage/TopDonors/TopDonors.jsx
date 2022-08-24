@@ -4,29 +4,6 @@ import "./TopDonors.css";
 const TopDonors = () => {
   const [name, setName] = useState([]);
 
-  // useEffect(() => {
-  //   const sendRequest = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         "https://placeofkindness-server.herokuapp.com/api/v1/donations/top3don"
-  //       );
-  //       const responseData = await response.json(response);
-  //       if (!response.ok) {
-  //         throw new Error(responseData.message);
-  //       }
-  //       // console.log(responseData.users[0].name);
-  //       setName(responseData);
-  //       console.log(name);
-  //       // console.log(name);
-  //       //console.log(name);
-  //       // console.log(name);
-  //       // console.log(name[0]);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   sendRequest();
-  // }, []);
   let response;
   let responseData;
   const getDonors = async () => {
@@ -39,7 +16,7 @@ const TopDonors = () => {
 
   useEffect(() => {
     getDonors();
-  }, []);
+  });
 
   return (
     <React.Fragment>
@@ -57,10 +34,34 @@ const TopDonors = () => {
           <div className="border"></div>
         </div>
       </div> */}
-      <div className="container">
-        <ul className="card card0">
+      <div className="donor-container">
+        <ul style={{ marginBottom: "2rem" }}>
           {name.map((name) => (
-            <li key={name.id}>{name.name}</li>
+            <li
+              style={{
+                display: "inline",
+                marginLeft: "15rem",
+                fontWeight: "bold",
+                fontStyle: "oblique",
+                fontSize: "20px",
+              }}
+              key={name.id}
+            >
+              <img
+                width={"100px"}
+                src="https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg"
+                alt="not load"
+              />
+              <div
+                style={{
+                  display: "inline",
+                  marginLeft: "1rem",
+                  marginRight: "5rem",
+                }}
+              >
+                {name.name}
+              </div>
+            </li>
           ))}
         </ul>
       </div>

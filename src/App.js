@@ -16,6 +16,8 @@ import { AuthContext } from "./shared/ProtectedRoute/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import SignupDash from "./shared/SignupDash/SignupDash";
+import Donated from "./shared/Request/ReqComponents/Donated";
+import RequestDona from "./shared/Request/ReqComponents/RequestDona";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,6 +61,8 @@ function App() {
             <Route path="/donors" element={<Donors />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/request" element={<Request />} />
+            <Route path="/donateditems" element={<Donated />} />
+            <Route path="/reqdonation" element={<RequestDona />} />
             {routes}
             {/* <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

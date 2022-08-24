@@ -1,7 +1,12 @@
 import React from "react";
+import ReqDash from "./RequestDashboard/ReqDash";
 
 const Request = () => {
-  return <div>Request</div>;
+  return (
+    <div>
+      <ReqDash />
+    </div>
+  );
 };
 
 export default Request;
