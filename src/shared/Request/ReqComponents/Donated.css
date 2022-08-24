@@ -18,7 +18,7 @@
 }
 
 .box {
-    padding-left: -10rem;
+  padding-left: -15rem;
   margin-left: 10rem;
   max-width: 12vw;
 }
@@ -28,8 +28,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin-left: -118rem;
-  margin-top: 10rem;
+  margin-left: -128rem;
+  margin-top: 5rem;
 }
 
 .grid > div {

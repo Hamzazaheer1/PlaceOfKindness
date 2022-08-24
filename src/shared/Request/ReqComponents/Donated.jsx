@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import "./Donated.css";
+import GetDonation from "./GetDonation/GetDonation";
+import { useNavigate } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 const Donated = () => {
-  const [data, setData] = useState([]);
+  let data;
+  const Navigate = useNavigate();
+  const [itemdata, setItemData] = useState([]);
+  const [itemId, setItemId] = useState(null);
 
   let response;
   let responseData;
@@ -12,215 +18,106 @@ const Donated = () => {
       "https://placeofkindness-server.herokuapp.com/api/v1/items/"
     );
     responseData = await response.json();
-    setData(responseData.data);
+    setItemData(responseData.data.data);
   };
 
   useEffect(() => {
     getItems();
   });
 
-  //console.log(data.data[0].name);
+  // const handledata = () => {
+  //   console.log(itemId);
+  //   <GetDonation sendData={itemId} />;
+  // };
 
-  const cardInfo = [
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-    {
-      image: "https://i.insider.com/50f967f56bb3f7830a000019",
-      title: "Lebron James",
-      text: "THE GOAT",
-    },
-    {
-      image:
-        "https://cdn.vox-cdn.com/thumbor/M1qLla2h-V_2yV_Z4nF_NHH_tjA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18286450/usa_today_12495932.jpg",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
-    },
-    {
-      image:
-        "https://www.insidehook.com/wp-content/uploads/2020/03/steph-curry-nba-jam-e1583192954848.jpg?fit=734%2C488",
-      title: "Steph Curry",
-      text: "he good",
-    },
-    {
-      image:
-        "https://i.pinimg.com/originals/03/ce/01/03ce015ea85dc84a17fb4c24a96cd87e.jpg",
-      title: "Michael Jordan",
-      text: "he is very close to goat",
-    },
-  ];
+  return (
+    <table style={{ marginLeft: "5rem" }}>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Profile</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Donated By</th>
+          <th>Get Donation</th>
+        </tr>
+      </thead>
+      <tbody>
+        {itemdata.map((item, index) => {
+          if (item.available === false && item.given === false) {
+            return (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{item.photo}</td>
+                <td>{item.name}</td>
+                <td>{item.category}$</td>
+                <td>{item.user[0].name}</td>
+                <td>
+                  <Popup
+                    trigger={
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          data = item._id;
+                          setItemId(data);
+                          // handledata();
+                          //Navigate("/getdonation");
+                          if (itemId) {
+                            alert("hello");
+                          } else {
+                            alert("nothello");
+                          }
+                        }}
+                      >
+                        Get Donation
+                      </button>
+                    }
+                  >
+                    <div
+                      style={{
+                        background: "black",
+                        width: "50vw",
+                        color: "white",
+                      }}
+                    >
+                      <h1>Confirm to get the Donations</h1>
+                      <h2>{item.name}</h2>
+                      <img
+                        width={"100px"}
+                        src="https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg"
+                        alt="not load"
+                      />
+                      <br />
+                      <h3>Enter Your CNIC</h3>
+                      <input type={"text"} />
+                      <br />
+                      <button>Submit</button>
+                    </div>
+                  </Popup>
+                </td>
+              </tr>
+            );
+          } else {
+            console.log("not availible");
+          }
+        })}
+      </tbody>
+    </table>
+  );
 
-  const renderCard = (card, index) => {
-    return (
-      <Card key={index} className="box" style={{ width: "1rem" }}>
-        <Card.Img variant="top" src={card.image} />
-        <Card.Body>
-          <Card.Title>{card.title}</Card.Title>
-          <Card.Text>{card.text}</Card.Text>
-        </Card.Body>
-      </Card>
-    );
-  };
+  // const renderCard = (item, index) => {
+  //   return (
+  //     <Card key={index} className="box" style={{ width: "1rem" }}>
+  //       <Card.Img variant="top" src={item.image} />
+  //       <Card.Body>
+  //         <Card.Title>{card.title}</Card.Title>
+  //         <Card.Text>{card.text}</Card.Text>
+  //       </Card.Body>
+  //     </Card>
+  //   );
+  // };
 
-  return <div className="grid">{cardInfo.map(renderCard)}</div>;
+  // return <div className="grid">{cardInfo.map(renderCard)}</div>;
 };
 
 export default Donated;

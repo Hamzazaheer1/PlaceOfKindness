@@ -18,6 +18,7 @@ import "./App.css";
 import SignupDash from "./shared/SignupDash/SignupDash";
 import Donated from "./shared/Request/ReqComponents/Donated";
 import RequestDona from "./shared/Request/ReqComponents/RequestDona";
+import GetDonation from "./shared/Request/ReqComponents/GetDonation/GetDonation";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -63,6 +64,7 @@ function App() {
             <Route path="/request" element={<Request />} />
             <Route path="/donateditems" element={<Donated />} />
             <Route path="/reqdonation" element={<RequestDona />} />
+            <Route path="/getdonation" element={<GetDonation />} />
             {routes}
             {/* <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
