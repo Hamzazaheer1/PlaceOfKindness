@@ -19,6 +19,7 @@ import SignupDash from "./shared/SignupDash/SignupDash";
 import Donated from "./shared/Request/ReqComponents/Donated";
 import RequestDona from "./shared/Request/ReqComponents/RequestDona";
 import GetDonation from "./shared/Request/ReqComponents/GetDonation/GetDonation";
+import ForumComment from "./shared/Forum/ForumComment";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -65,6 +66,7 @@ function App() {
             <Route path="/donateditems" element={<Donated />} />
             <Route path="/reqdonation" element={<RequestDona />} />
             <Route path="/getdonation" element={<GetDonation />} />
+            <Route path="/forumcomments" element={<ForumComment />} />
             {routes}
             {/* <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
