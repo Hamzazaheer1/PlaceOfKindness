@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
-import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
 import "./Login.css";
 
 const Login = () => {
-  const Navigate = useNavigate();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -28,19 +26,16 @@ const Login = () => {
         alert(responseData.message);
         throw new Error(responseData.message);
       }
+      localStorage.setItem("token", responseData.token);
       alert(responseData.data.role);
       console.log(responseData);
-      auth.login() && Navigate("/userdash");
-
-      // {
-      //   auth.login() && Navigate("/userdash");
-      // }
+      window.location = "/userdash";
     } catch (err) {
       console.log(err);
     }
   };
 
-  const auth = useContext(AuthContext);
+  // const auth = useContext(AuthContext);
   return (
     <React.Fragment>
       <div className="login-div">

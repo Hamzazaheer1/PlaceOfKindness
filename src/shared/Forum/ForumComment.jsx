@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const ForumComment = (props) => {
+  const token = localStorage.getItem("token");
+  const bearer = "Bearer " + token;
   const [itemData, setItemData] = useState([]);
-  //const [itemId, setItemId] = useState();
   const [comment, setComment] = useState();
-  //const [commentarr, setCommentArr] = useState([]);
 
   const mycomments = [{ comment: "No comment Found", user: ["temp"] }];
 
@@ -28,19 +28,48 @@ const ForumComment = (props) => {
     getItems();
   }, []);
 
+  const commentSubmitHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `https://placeofkindness-server.herokuapp.com/api/v1/posts/${props.data}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+          body: JSON.stringify({
+            comment: comment,
+          }),
+        }
+      );
+
+      const responseData = await response.json();
+      if (!response.ok) {
+        alert(responseData.message);
+        throw new Error(responseData.message);
+      }
+      alert(responseData.status);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div style={{ marginLeft: "2rem", marginTop: "1rem" }}>
-      {/* <h1>{props.data}</h1> */}
       <h1>{props.title}</h1>
-      <form>
-        <input
-          type="text"
-          required
-          onChange={(e) => setComment(e.target.value)}
-          placeholder={"What are your thoughts "}
-        />
-        <button>Comment</button>
-      </form>
+      {token && (
+        <form>
+          <input
+            type="text"
+            required
+            onChange={(e) => setComment(e.target.value)}
+            placeholder={"What are your thoughts "}
+          />
+          <button onClick={commentSubmitHandler}>Comment</button>
+        </form>
+      )}
       <br />
       {itemData.map((item) => (
         <div key={item.id}>

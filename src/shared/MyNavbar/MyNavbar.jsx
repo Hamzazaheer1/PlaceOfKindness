@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Logout from "../Logout/Logout";
 import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
 import "./MyNavbar.css";
 
-const MyNavbar = () => {
+const MyNavbar = (user) => {
+  console.log(user.user);
   const auth = useContext(AuthContext);
   return (
     <nav>
@@ -23,7 +25,7 @@ const MyNavbar = () => {
       </div>
       <div class="nav-items">
         <li>
-          <Link to="/donors">Donors</Link>
+          <Link to="/needy">Needy</Link>
         </li>
         <li>
           <Link to="/forum">Forum</Link>
@@ -31,12 +33,12 @@ const MyNavbar = () => {
         <li>
           <Link to="/request">Request</Link>
         </li>
-        {auth.isLoggedIn && (
+        {user.user && (
           <li>
             <Link to="/admindash">UserDash</Link>
           </li>
         )}
-        {auth.isLoggedIn && (
+        {user.user && (
           <li>
             <Link to="/userdash">AdminDash</Link>
           </li>
@@ -44,19 +46,24 @@ const MyNavbar = () => {
       </div>
       {/* paddingLeft 70rem after removal of dash */}
       <div class="nav-items" style={{ paddingLeft: "55rem" }}>
-        {!auth.isLoggedIn && (
+        {!user.user && (
           <li>
             <Link to="/login">Sign in</Link>
           </li>
         )}
-        {!auth.isLoggedIn && (
+        {!user.user && (
           <li>
             <Link to="/signupdash">Sign up</Link>
           </li>
         )}
-        {auth.isLoggedIn && (
+        {user.user && (
           <li>
-            <button onClick={auth.logout}>Logout</button>
+            <Link to="/userprofile">Profile</Link>
+          </li>
+        )}
+        {user.user && (
+          <li>
+            <Link to="/logout">Logout</Link>
           </li>
         )}
       </div>

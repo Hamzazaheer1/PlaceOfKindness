@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 //import { Card } from "react-bootstrap";
 import "./Donated.css";
-// import { useNavigate } from "react-router-dom";
 
 const Donated = () => {
+  const token = localStorage.getItem("token");
+  const bearer = "Bearer " + token;
   let data;
-  //const Navigate = useNavigate();
   const [itemdata, setItemData] = useState([]);
   const [itemId, setItemId] = useState(null);
   const [address, setAddress] = useState("");
@@ -31,7 +31,10 @@ const Donated = () => {
         `https://placeofkindness-server.herokuapp.com/api/v1/items/${itemId}/needyitem`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
           body: JSON.stringify({
             shipaddress: address,
           }),
