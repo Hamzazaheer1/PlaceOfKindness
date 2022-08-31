@@ -12,27 +12,38 @@ import Signup from "./shared/Signup/Signup";
 import NeedySignup from "./shared/NeedySignup/NeedySignup";
 import Footer from "./shared/Footer/Footer";
 import AdminDash from "./Admin/AdminDash/AdminDash";
-import UserDash from "./User/UserDash/UserDash";
 import { AuthContext } from "./shared/ProtectedRoute/ProtectedRoute";
 import SignupDash from "./shared/SignupDash/SignupDash";
 import Donated from "./shared/Request/ReqComponents/Donated";
 import RequestDona from "./shared/Request/ReqComponents/RequestDona";
 import GetDonation from "./shared/Request/ReqComponents/GetDonation/GetDonation";
 import ForumComment from "./shared/Forum/ForumComment";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import Logout from "./shared/Logout/Logout";
 import NotFoundComponent from "./shared/ComponentNotFound/NotFoundComponent";
 import UserProfile from "./User/UserProfile/UserProfile";
 import Needy from "./shared/Needy/Needy";
+import DonarDash from "./User/Dashboards/DonarDash";
+import NeedyDash from "./User/Dashboards/NeedyDash";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import ForgotPass from "./shared/ForgotPass/ForgotPass";
+import ChangePass from "./shared/ForgotPass/ChangePass";
 
 let logUser;
-if (localStorage.token) {
-  const jwt = localStorage.getItem("token");
+let jwt;
+if (localStorage.donator) {
+  jwt = localStorage.getItem("donator");
+  setAuthToken(jwt);
+  logUser = jwtDecode(jwt);
+} else if (localStorage.token) {
+  jwt = localStorage.getItem("token");
+  setAuthToken(jwt);
+  logUser = jwtDecode(jwt);
+} else if (localStorage.needy) {
+  jwt = localStorage.getItem("needy");
   setAuthToken(jwt);
   logUser = jwtDecode(jwt);
 }
-
 function App() {
   const [user, setUser] = useState(logUser);
 
@@ -53,7 +64,8 @@ function App() {
     routes = (
       <React.Fragment>
         <Route path="/admindash" element={<AdminDash />} />
-        <Route path="/userdash" element={<UserDash />} />
+        <Route path="/donordash" element={<DonarDash />} />
+        <Route path="/needydash" element={<NeedyDash />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/userprofile" element={<UserProfile />} />
       </React.Fragment>
@@ -86,6 +98,8 @@ function App() {
             <Route path="/reqdonation" element={<RequestDona />} />
             <Route path="/getdonation" element={<GetDonation />} />
             <Route path="/forumcomments" element={<ForumComment />} />
+            <Route path="/forgotpass" element={<ForgotPass />} />
+            <Route path="/changepass/:token" element={<ChangePass />} />
             {routes}
             {/* <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

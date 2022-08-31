@@ -1,15 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Logout from "../Logout/Logout";
-import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
 import "./MyNavbar.css";
 
 const MyNavbar = (user) => {
-  console.log(user.user);
-  const auth = useContext(AuthContext);
+  let x;
+  if (localStorage.getItem("donator")) {
+    x = "donator";
+  } else if (localStorage.getItem("needy")) {
+    x = "needy";
+  } else if (localStorage.getItem("token")) {
+    x = "token";
+  }
+
   return (
     <nav>
-      <div class="logo">
+      <div className="logo">
         <Link
           style={{
             color: "#0092dd",
@@ -23,7 +28,7 @@ const MyNavbar = (user) => {
           PlaceOfKindness
         </Link>
       </div>
-      <div class="nav-items">
+      <div className="nav-items">
         <li>
           <Link to="/needy">Needy</Link>
         </li>
@@ -33,19 +38,24 @@ const MyNavbar = (user) => {
         <li>
           <Link to="/request">Request</Link>
         </li>
-        {user.user && (
+        {user.user && x === "donator" && (
           <li>
-            <Link to="/admindash">UserDash</Link>
+            <Link to="/donordash">DonorDash</Link>
           </li>
         )}
-        {user.user && (
+        {user.user && x === "needy" && (
           <li>
-            <Link to="/userdash">AdminDash</Link>
+            <Link to="/needydash">NeedyDash</Link>
+          </li>
+        )}
+        {user.user && x === "token" && (
+          <li>
+            <Link to="/admindash">AdminDash</Link>
           </li>
         )}
       </div>
       {/* paddingLeft 70rem after removal of dash */}
-      <div class="nav-items" style={{ paddingLeft: "55rem" }}>
+      <div className="nav-items" style={{ paddingLeft: "55rem" }}>
         {!user.user && (
           <li>
             <Link to="/login">Sign in</Link>

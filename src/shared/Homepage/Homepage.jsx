@@ -6,7 +6,7 @@ import TopDonors from "./TopDonors/TopDonors";
 const Homepage = () => {
   return (
     <React.Fragment>
-      <div class="banner">
+      <div className="banner">
         <div>
           <h1>Welcome to the Place of Kindness</h1>
           <h5>

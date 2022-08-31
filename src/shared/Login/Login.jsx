@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
-// import { AuthContext } from "../ProtectedRoute/ProtectedRoute";
+import React, { useState } from "react";
+import DonarDash from "../../User/Dashboards/DonarDash";
+
 import "./Login.css";
 
 const Login = () => {
@@ -26,16 +27,27 @@ const Login = () => {
         alert(responseData.message);
         throw new Error(responseData.message);
       }
-      localStorage.setItem("token", responseData.token);
+      //localStorage.setItem(x, responseData.token);
       alert(responseData.data.role);
-      console.log(responseData);
-      window.location = "/userdash";
+      if (responseData.data.role === "donator") {
+        localStorage.setItem("donator", responseData.token);
+        window.location = "/donordash";
+      } else if (responseData.data.role === "needy") {
+        localStorage.setItem("needy", responseData.token);
+        window.location = "/needydash";
+      } else {
+        localStorage.setItem("token", responseData.token);
+        window.location = "/admindash";
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  // const auth = useContext(AuthContext);
+  const forgotHandler = () => {
+    window.location = "/forgotpass";
+  };
+
   return (
     <React.Fragment>
       <div className="login-div">
@@ -65,6 +77,9 @@ const Login = () => {
               </div>
             </form>
             <button onClick={authSubmitHandler}>Sign in</button>
+            <p style={{ color: "white" }} onClick={forgotHandler}>
+              Forgot Password
+            </p>
           </div>
         </div>
       </div>

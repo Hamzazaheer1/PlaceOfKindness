@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="footer-main">
       <footer>
         {/* <!--The main area of the footer --> */}
-        <div class="footer-content">
+        <div className="footer-content">
           <h3>Place of Kindness</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
@@ -15,7 +15,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div class="footer-bottom">
+        <div className="footer-bottom">
           <p>
             Design By - <span>Hamza</span>
           </p>

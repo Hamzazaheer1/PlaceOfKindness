@@ -20,7 +20,7 @@ const TopDonations = () => {
   return (
     <React.Fragment>
       <h2 className="top-donors-h2">Our Top Donations.</h2>
-      <div class="donation-container">
+      <div className="donation-container">
         <table>
           <thead>
             <tr>
