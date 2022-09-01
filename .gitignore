@@ -3,6 +3,7 @@
 /github
 /.pnp
 .pnp.js
+.github.txt
 
 # testing
 /coverage

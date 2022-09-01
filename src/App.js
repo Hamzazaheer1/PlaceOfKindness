@@ -23,11 +23,12 @@ import NotFoundComponent from "./shared/ComponentNotFound/NotFoundComponent";
 import UserProfile from "./User/UserProfile/UserProfile";
 import Needy from "./shared/Needy/Needy";
 import DonarDash from "./User/Dashboards/DonarDash";
-import NeedyDash from "./User/Dashboards/NeedyDash";
+// import NeedyDash from "./User/Dashboards/NeedyDash";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ForgotPass from "./shared/ForgotPass/ForgotPass";
 import ChangePass from "./shared/ForgotPass/ChangePass";
+import NeedyDashbord from "./User/Dashboards/NeedyDashbord";
 
 let logUser;
 let jwt;
@@ -65,7 +66,7 @@ function App() {
       <React.Fragment>
         <Route path="/admindash" element={<AdminDash />} />
         <Route path="/donordash" element={<DonarDash />} />
-        <Route path="/needydash" element={<NeedyDash />} />
+        <Route path="/needydash" element={<NeedyDashbord />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/userprofile" element={<UserProfile />} />
       </React.Fragment>

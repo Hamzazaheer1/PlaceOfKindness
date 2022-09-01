@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const ForumComment = (props) => {
-  const token = localStorage.getItem("token");
+  let token;
+  if (localStorage.token) {
+    token = localStorage.getItem("token");
+  } else if (localStorage.needy) {
+    token = localStorage.getItem("needy");
+  } else if (localStorage.donator) {
+    token = localStorage.getItem("donator");
+  }
+
   const bearer = "Bearer " + token;
   const [itemData, setItemData] = useState([]);
   const [comment, setComment] = useState();
@@ -17,7 +25,7 @@ const ForumComment = (props) => {
     responseData = await response.json();
     setItemData(responseData.data.data);
     if (responseData.data.data.comments.length != 0) {
-      console.log(responseData.data.data.comments[0]);
+      // console.log(responseData.data.data.comments[0]);
       setItemData(responseData.data.data.comments);
     } else {
       setItemData(mycomments);

@@ -13,7 +13,7 @@ function ReqDash() {
       <Tab eventKey="Donated" title="Donated Items">
         <Donated />
       </Tab>
-      <Tab eventKey="Request" title="Request Donation">
+      <Tab eventKey="Request" title="Requested Donations">
         <RequestDona />
       </Tab>
     </Tabs>

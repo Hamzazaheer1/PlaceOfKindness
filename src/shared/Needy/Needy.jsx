@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import defaultimg from "../../image/default.jpg";
 
 const Needy = () => {
   const [respData, setRespData] = useState([]);
@@ -25,7 +26,7 @@ const Needy = () => {
       <div>
         {respData.map((item) => (
           <div>
-            <p>{item.photo}</p>
+            <img src={item.photo} alt={defaultimg} width="100px" />
             <p>{item.name}</p>
           </div>
         ))}

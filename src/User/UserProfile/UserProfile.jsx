@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import defaultimg from "../../image/default.jpg";
 
 let jwt;
 if (localStorage.donator) {
@@ -71,16 +72,12 @@ const UserProfile = () => {
     <React.Fragment>
       <div style={{ marginLeft: "2rem", marginTop: "1rem" }}>
         <h1>User Profile</h1>
-        <h2>{respData.photo}</h2>
+        <img src={respData.photo} alt={defaultimg} width="100px" />
         <p>{respData.name}</p>
         <p>{respData.email}</p>
         <p>{respData.role}</p>
         <p>{respData.username}</p>
-        {/* <p>{respData.requestlimit}</p>  needy*/}
-        {/* <p>{respData.cninc}</p>  needy*/}
         <p>{respData.donated}</p>
-        {/* <p>{respData.posts.length}</p>
-      <p>{respData.items.length}</p> */}
       </div>
       <div>
         <h1>Update Password</h1>
