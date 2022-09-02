@@ -20,7 +20,7 @@ const NeedyPosts = () => {
       }
     );
     const responseData = await response.json();
-    setRespData(responseData.data.doc.posts);
+    setRespData(responseData.data.posts);
   };
 
   useEffect(() => {

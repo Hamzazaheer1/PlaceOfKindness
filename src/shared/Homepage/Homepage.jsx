@@ -15,11 +15,13 @@ const Homepage = () => {
           <h4>Mother Teresa</h4>
         </div>
       </div>
+
       <div>
         <TopDonors />
       </div>
       <div>
         <TopDonations />
+        <br />
       </div>
     </React.Fragment>
   );

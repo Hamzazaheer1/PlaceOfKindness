@@ -47,12 +47,7 @@ const TopDonors = () => {
               }}
               key={name.id}
             >
-              <img
-                width={"100px"}
-                height={"100px"}
-                src={name.photo}
-                alt="not load"
-              />
+              <img width={"100px"} height={"100px"} src={name.photo} />
               <div
                 style={{
                   display: "inline",

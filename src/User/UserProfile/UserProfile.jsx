@@ -31,7 +31,7 @@ const UserProfile = () => {
       }
     );
     responseData = await response.json();
-    setRespData(responseData.data.doc);
+    setRespData(responseData.data);
   };
 
   useEffect(() => {

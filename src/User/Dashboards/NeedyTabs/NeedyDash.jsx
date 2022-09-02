@@ -88,8 +88,7 @@ const NeedyDash = () => {
       }
     );
     const responseData = await response.json();
-    setRespData(responseData.data.doc.requests);
-    console.log(respData);
+    setRespData(responseData.data.requests);
   };
 
   useEffect(() => {

@@ -22,8 +22,6 @@ const DonationList = () => {
     getItems();
   }, []);
 
-  console.log(responseData);
-
   const reqDeleteHandler = async (x) => {
     try {
       const response = await fetch(
