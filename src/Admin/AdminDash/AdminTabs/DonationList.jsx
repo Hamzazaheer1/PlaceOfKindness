@@ -15,12 +15,14 @@ const DonationList = () => {
       "https://placeofkindness-server.herokuapp.com/api/v1/request/"
     );
     responseData = await response.json();
-    setItemData(responseData.data.data);
+    setItemData(responseData.data);
   };
 
   useEffect(() => {
     getItems();
   }, []);
+
+  console.log(responseData);
 
   const reqDeleteHandler = async (x) => {
     try {

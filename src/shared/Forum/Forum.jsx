@@ -13,7 +13,7 @@ const Forum = () => {
       "https://placeofkindness-server.herokuapp.com/api/v1/posts/"
     );
     responseData = await response.json();
-    setItemData(responseData.data.data);
+    setItemData(responseData.data);
   };
 
   useEffect(() => {

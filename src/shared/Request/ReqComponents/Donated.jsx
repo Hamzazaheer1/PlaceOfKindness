@@ -17,7 +17,7 @@ const Donated = () => {
       "https://placeofkindness-server.herokuapp.com/api/v1/items/"
     );
     responseData = await response.json();
-    setItemData(responseData.data.data);
+    setItemData(responseData.data);
   };
 
   useEffect(() => {
@@ -47,7 +47,6 @@ const Donated = () => {
         throw new Error(responseData.message);
       }
       alert(responseData.data.role);
-      console.log(responseData);
     } catch (err) {
       console.log(err);
     }
@@ -72,7 +71,9 @@ const Donated = () => {
               return (
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{item.photo}</td>
+                  <td>
+                    <img src={item.photo} alt="" />
+                  </td>
                   <td>{item.name}</td>
                   <td>{item.category}$</td>
                   <td>{item.user[0].name}</td>

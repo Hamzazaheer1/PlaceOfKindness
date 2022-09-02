@@ -12,7 +12,7 @@ const Needy = () => {
       "https://placeofkindness-server.herokuapp.com/api/v1/users/needyusers"
     );
     responseData = await response.json();
-    setRespData(responseData.data.body);
+    setRespData(responseData.data);
     console.log(respData);
   };
 

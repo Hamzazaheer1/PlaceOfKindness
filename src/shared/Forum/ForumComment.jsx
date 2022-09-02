@@ -23,10 +23,9 @@ const ForumComment = (props) => {
       `https://placeofkindness-server.herokuapp.com/api/v1/posts/${props.data}`
     );
     responseData = await response.json();
-    setItemData(responseData.data.data);
-    if (responseData.data.data.comments.length != 0) {
-      // console.log(responseData.data.data.comments[0]);
-      setItemData(responseData.data.data.comments);
+    setItemData(responseData.data.comments);
+    if (responseData.data.comments.length != 0) {
+      setItemData(responseData.data.comments);
     } else {
       setItemData(mycomments);
     }

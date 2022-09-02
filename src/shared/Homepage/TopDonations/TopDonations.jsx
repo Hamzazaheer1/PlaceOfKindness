@@ -34,9 +34,14 @@ const TopDonations = () => {
             {data.map((item, index) => (
               <tr>
                 <td>{index + 1}</td>
-                <td>{item.photo}</td>
+                <td>
+                  <img src={item.photo} width={"50px"} height={"50px"} />
+                </td>
                 <td>{item.Name}</td>
-                <td>{item.donated}$</td>
+                <td>
+                  {item.donated}
+                  <b>pkr</b>
+                </td>
               </tr>
             ))}
           </tbody>

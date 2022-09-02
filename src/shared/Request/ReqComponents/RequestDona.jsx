@@ -9,7 +9,7 @@ const RequestDona = () => {
       "https://placeofkindness-server.herokuapp.com/api/v1/request/"
     );
     responseData = await response.json();
-    setItemData(responseData.data.data);
+    setItemData(responseData.data);
   };
 
   useEffect(() => {

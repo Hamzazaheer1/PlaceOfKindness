@@ -49,7 +49,8 @@ const TopDonors = () => {
             >
               <img
                 width={"100px"}
-                src="https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg"
+                height={"100px"}
+                src={name.photo}
                 alt="not load"
               />
               <div
