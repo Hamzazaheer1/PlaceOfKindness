@@ -67,32 +67,28 @@ const Donated = () => {
         </thead>
         <tbody>
           {itemdata.map((item, index) => {
-            if (item.available === false && item.given === false) {
-              return (
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>
-                    <img src={item.photo} alt="" />
-                  </td>
-                  <td>{item.name}</td>
-                  <td>{item.category}$</td>
-                  <td>{item.user[0].name}</td>
-                  <td>
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        data = item;
-                        setItemId(data);
-                      }}
-                    >
-                      Get Donation
-                    </button>
-                  </td>
-                </tr>
-              );
-            } else {
-              console.log("not availible");
-            }
+            return (
+              <tr>
+                <td>{index + 1}</td>
+                <td>
+                  <img src={item.photo} alt="" />
+                </td>
+                <td>{item.name}</td>
+                <td>{item.category}$</td>
+                <td>{item.user[0].name}</td>
+                <td>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      data = item;
+                      setItemId(data);
+                    }}
+                  >
+                    Get Donation
+                  </button>
+                </td>
+              </tr>
+            );
           })}
         </tbody>
       </table>

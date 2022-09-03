@@ -45,36 +45,56 @@ const NeedyDash = () => {
     }
   };
 
-  const updateReqHandler = async (event) => {
-    event.preventDefault();
+  const reqDeleteHandler = async (x) => {
     try {
       const response = await fetch(
-        `https://placeofkindness-server.herokuapp.com/api/v1/request/${reqId}`,
+        `https://placeofkindness-server.herokuapp.com/api/v1/request/${x}`,
         {
-          method: "PATCH",
+          method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
             Authorization: bearer,
           },
-          body: JSON.stringify({
-            title: title,
-            description: description,
-            amount: amount,
-            paymentacc: paymentAc,
-          }),
         }
       );
 
-      const responseData = await response.json();
-      if (!response.ok) {
-        alert(responseData.message);
-        throw new Error(responseData.message);
+      if (response.status === 204) {
+        alert("Request Deleted Sucessfully!!!!");
       }
-      alert("Request Updated Sucessfully!!!!");
     } catch (err) {
       console.log(err);
     }
   };
+
+  // const updateReqHandler = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `https://placeofkindness-server.herokuapp.com/api/v1/request/${reqId}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //         body: JSON.stringify({
+  //           title: title,
+  //           description: description,
+  //           amount: amount,
+  //           paymentacc: paymentAc,
+  //         }),
+  //       }
+  //     );
+
+  //     const responseData = await response.json();
+  //     if (!response.ok) {
+  //       alert(responseData.message);
+  //       throw new Error(responseData.message);
+  //     }
+  //     alert("Request Updated Sucessfully!!!!");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const getProfile = async () => {
     const response = await fetch(
@@ -94,13 +114,13 @@ const NeedyDash = () => {
     getProfile();
   }, []);
 
-  const updateReqId = (a, b, c, d, e) => {
-    setReqId(a);
-    setTitle(b);
-    setDescription(c);
-    setAmount(d);
-    setPaymentAc(e);
-  };
+  // const updateReqId = (a, b, c, d, e) => {
+  //   setReqId(a);
+  //   setTitle(b);
+  //   setDescription(c);
+  //   setAmount(d);
+  //   setPaymentAc(e);
+  // };
 
   return (
     <div>
@@ -142,7 +162,7 @@ const NeedyDash = () => {
         </div>
       </div>
       <br />
-      <div>
+      {/* <div>
         <h3>Update Existing Request</h3>
         <div>
           <form>
@@ -181,7 +201,7 @@ const NeedyDash = () => {
             <button onClick={updateReqHandler}>Update</button>
           </form>
         </div>
-      </div>
+      </div> */}
       <br />
       <h3>Requested Donations by Needy</h3>
       {respData ? (
@@ -195,13 +215,7 @@ const NeedyDash = () => {
             <p>{item.paymentacc}</p>
             <p
               onClick={() => {
-                updateReqId(
-                  item.id,
-                  item.title,
-                  item.description,
-                  item.amount,
-                  item.paymentacc
-                );
+                reqDeleteHandler(item.id);
               }}
               style={{
                 boarder: "solid",
@@ -210,7 +224,7 @@ const NeedyDash = () => {
                 width: "3vw",
               }}
             >
-              Update
+              Delete
             </p>
           </div>
         ))

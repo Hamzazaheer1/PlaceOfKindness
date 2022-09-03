@@ -33,8 +33,9 @@ const Signup = () => {
         alert(responseData.message);
         throw new Error(responseData.message);
       }
-      alert(responseData.message);
-      console.log(responseData);
+      alert("Needy Account has been created!!!");
+      // console.log(responseData);
+
       // auth.login();
     } catch (err) {
       console.log(err);

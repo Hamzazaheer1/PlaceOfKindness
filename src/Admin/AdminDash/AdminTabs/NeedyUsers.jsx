@@ -32,25 +32,24 @@ const NeedyUsers = () => {
     getDonors();
   }, []);
 
-  const updateRoleId = (a, b) => {
-    setUserRole(b);
-    setUserId(a);
-  };
+  // const updateRoleId = (a, b) => {
+  //   setUserRole(b);
+  //   setUserId(a);
+  // };
 
-  const userUpdateHandler = async (event) => {
-    event.preventDefault();
+  const userUpdateHandler = async (x) => {
     try {
       const response = await fetch(
-        `https://placeofkindness-server.herokuapp.com/api/v1/users/${userId}`,
+        `https://placeofkindness-server.herokuapp.com/api/v1/users/needyverify/${x}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: bearer,
           },
-          body: JSON.stringify({
-            role: userRole,
-          }),
+          // body: JSON.stringify({
+          //   role: userRole,
+          // }),
         }
       );
 
@@ -67,7 +66,7 @@ const NeedyUsers = () => {
 
   return (
     <div>
-      <h1>Give User Role</h1>
+      {/* <h1>Give User Role</h1>
       <div>
         <form>
           <input
@@ -80,7 +79,7 @@ const NeedyUsers = () => {
           <br />
           <button onClick={userUpdateHandler}>Update</button>
         </form>
-      </div>
+      </div> */}
       <h1>List of Unvarified Needy Users</h1>
       {respData &&
         respData.map((item) => (
@@ -95,7 +94,7 @@ const NeedyUsers = () => {
             <p>{item.donated}</p>
             <p
               onClick={() => {
-                updateRoleId(item._id, item.role);
+                userUpdateHandler(item._id);
               }}
               style={{
                 boarder: "solid",
