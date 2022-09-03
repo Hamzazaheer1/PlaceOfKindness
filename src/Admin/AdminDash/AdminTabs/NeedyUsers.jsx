@@ -24,7 +24,7 @@ const NeedyUsers = () => {
       }
     );
     responseData = await response.json();
-
+    console.log(responseData);
     setRespData(responseData.data);
   };
 
@@ -49,7 +49,7 @@ const NeedyUsers = () => {
             Authorization: bearer,
           },
           body: JSON.stringify({
-            temprole: userRole,
+            role: userRole,
           }),
         }
       );

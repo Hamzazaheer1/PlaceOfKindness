@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 const DonatedItems = () => {
   const token = localStorage.getItem("token");
   const bearer = "Bearer " + token;
-  let data;
+  //let data;
   const [itemdata, setItemData] = useState([]);
   const [itemId, setItemId] = useState(null);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [availible, setAvailible] = useState("");
-  const [given, setGiven] = useState("");
+  const [availible, setAvailible] = useState(false);
+  const [given, setGiven] = useState(false);
 
   let response;
   let responseData;
@@ -112,7 +112,7 @@ const DonatedItems = () => {
             type="text"
             required
             onChange={(e) => setAvailible(e.target.value)}
-            placeholder={"Availibility"}
+            placeholder={"true of false"}
             value={availible}
           />
           <br />
@@ -121,7 +121,7 @@ const DonatedItems = () => {
             type="text"
             required
             onChange={(e) => setGiven(e.target.value)}
-            placeholder={"Given"}
+            placeholder={"true or false"}
             value={given}
           />
           <br />
@@ -135,7 +135,6 @@ const DonatedItems = () => {
       {itemdata &&
         itemdata.map((item) => (
           <div style={{ border: "solid" }}>
-            {console.log(item)}
             <h4>{item.name}</h4>
             <h4>{item.category}</h4>
             <h4>{item.createdAt}</h4>

@@ -110,7 +110,7 @@ const Donated = () => {
             <p>{itemId.category}</p>
             <form>
               <label>
-                Enter your Address:
+                Enter your Shipping Address:
                 <input
                   type="text"
                   required

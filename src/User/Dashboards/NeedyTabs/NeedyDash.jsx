@@ -5,7 +5,6 @@ const NeedyDash = () => {
   if (localStorage.needy) {
     token = localStorage.getItem("needy");
   }
-  //const token = localStorage.getItem("token");
   let bearer = "Bearer " + token;
 
   const [title, setTitle] = useState("");

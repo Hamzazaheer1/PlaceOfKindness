@@ -27,7 +27,7 @@ const NeedyPosts = () => {
     getProfile();
   }, []);
 
-  //   console.log(respData);
+  console.log(respData);
   return (
     <div>
       <h3>Your Posts</h3>

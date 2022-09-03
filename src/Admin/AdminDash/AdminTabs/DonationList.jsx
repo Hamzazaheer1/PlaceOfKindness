@@ -33,7 +33,6 @@ const DonationList = () => {
           },
         }
       );
-      console.log(response);
       if (response.status === 204) {
         alert("Request Deleted Sucessfully!!!!");
       }

@@ -7,8 +7,8 @@ const AComment = () => {
   }
   const bearer = "Bearer " + jwt;
 
-  const [comment, setComment] = useState("");
-  const [commentId, setCommentId] = useState("");
+  // const [comment, setComment] = useState("");
+  // const [commentId, setCommentId] = useState("");
   const [respData, setRespData] = useState([]);
   let response;
   let responseData;
@@ -30,38 +30,38 @@ const AComment = () => {
     getDonors();
   }, []);
 
-  const updateComment = (a, b) => {
-    setComment(b);
-    setCommentId(a);
-  };
+  // const updateComment = (a, b) => {
+  //   setComment(b);
+  //   setCommentId(a);
+  // };
 
-  const commentUpdateHandler = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch(
-        `https://placeofkindness-server.herokuapp.com/api/v1/comments/${commentId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-          body: JSON.stringify({
-            comment: comment,
-          }),
-        }
-      );
+  // const commentUpdateHandler = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `https://placeofkindness-server.herokuapp.com/api/v1/comments/${commentId}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //         body: JSON.stringify({
+  //           comment: comment,
+  //         }),
+  //       }
+  //     );
 
-      const responseData = await response.json();
-      if (!response.ok) {
-        alert(responseData.message);
-        throw new Error(responseData.message);
-      }
-      alert("Comment Updated Sucessfully!!!!");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     const responseData = await response.json();
+  //     if (!response.ok) {
+  //       alert(responseData.message);
+  //       throw new Error(responseData.message);
+  //     }
+  //     alert("Comment Updated Sucessfully!!!!");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const postDeleteHandler = async (x) => {
     try {
@@ -87,7 +87,7 @@ const AComment = () => {
     <div>
       <h1>Admin Comment Panel</h1>
       <br />
-      <h1>Update Comments</h1>
+      {/* <h1>Update Comments</h1>
       <div>
         <form>
           <input
@@ -102,7 +102,7 @@ const AComment = () => {
           <button onClick={commentUpdateHandler}>Update</button>
           <br />
         </form>
-      </div>
+      </div> */}
 
       <h1>Comments</h1>
       {respData &&
@@ -112,7 +112,7 @@ const AComment = () => {
             <h5>{item.user[0].name}</h5>
             <h5>{item.createdAt}</h5>
             <div style={{ display: "flex" }}>
-              <p
+              {/* <p
                 onClick={() => {
                   updateComment(item.id, item.comment);
                 }}
@@ -125,7 +125,7 @@ const AComment = () => {
               >
                 Update
               </p>
-              <p>&nbsp;&nbsp;</p>
+              <p>&nbsp;&nbsp;</p> */}
               <p
                 onClick={() => {
                   postDeleteHandler(item.id);

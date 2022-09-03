@@ -7,9 +7,9 @@ const UsersPost = () => {
   }
   const bearer = "Bearer " + jwt;
   const [itemData, setItemData] = useState([]);
-  const [postId, setPostId] = useState("");
-  const [postTitle, setPostTitle] = useState("");
-  const [postDesc, setPostDesc] = useState("");
+  // const [postId, setPostId] = useState("");
+  // const [postTitle, setPostTitle] = useState("");
+  // const [postDesc, setPostDesc] = useState("");
 
   let response;
   let responseData;
@@ -25,41 +25,40 @@ const UsersPost = () => {
     getItems();
   }, []);
 
-  const updatePost = (a, b, c) => {
-    setPostId(a);
-    setPostTitle(b);
-    setPostDesc(c);
-  };
+  // const updatePost = (a, b, c) => {
+  //   setPostId(a);
+  //   setPostTitle(b);
+  //   setPostDesc(c);
+  // };
 
-  const userUpdateHandler = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch(
-        `https://placeofkindness-server.herokuapp.com/api/v1/posts/${postId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: bearer,
-          },
-          body: JSON.stringify({
-            title: postTitle,
-            description: postDesc,
-          }),
-        }
-      );
+  // const userUpdateHandler = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       `https://placeofkindness-server.herokuapp.com/api/v1/posts/${postId}`,
+  //       {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: bearer,
+  //         },
+  //         body: JSON.stringify({
+  //           title: postTitle,
+  //           description: postDesc,
+  //         }),
+  //       }
+  //     );
 
-      const responseData = await response.json();
-      console.log(responseData);
-      if (!response.ok) {
-        alert(responseData.message);
-        throw new Error(responseData.message);
-      }
-      alert("Request Updated Sucessfully!!!!");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     const responseData = await response.json();
+  //     if (!response.ok) {
+  //       alert(responseData.message);
+  //       throw new Error(responseData.message);
+  //     }
+  //     alert("Request Updated Sucessfully!!!!");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const postDeleteHandler = async (x) => {
     try {
@@ -83,7 +82,7 @@ const UsersPost = () => {
 
   return (
     <div>
-      <h1>Update User Posts</h1>
+      {/* <h1>Update User Posts</h1>
       <div>
         <form>
           <input
@@ -108,7 +107,7 @@ const UsersPost = () => {
           <button onClick={userUpdateHandler}>Update</button>
         </form>
         <br />
-      </div>
+      </div> */}
       <h1>UsersPost</h1>
       {itemData &&
         itemData.map((item) => (
@@ -119,7 +118,7 @@ const UsersPost = () => {
             <p>{item.user[0].name}</p>
             <p>{item.createdAt}</p>
             <div style={{ display: "flex" }}>
-              <p
+              {/* <p
                 onClick={() => {
                   updatePost(item.id, item.title, item.description);
                 }}
@@ -132,7 +131,7 @@ const UsersPost = () => {
               >
                 Update POST
               </p>
-              <p>&nbsp;&nbsp;</p>
+              <p>&nbsp;&nbsp;</p> */}
               <p
                 onClick={() => {
                   postDeleteHandler(item.id);
