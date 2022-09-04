@@ -67,6 +67,7 @@ function App() {
       <React.Fragment>
         <Route path="/admindash" element={<AdminDash />} />
         <Route path="/donordash" element={<DonarDash />} />
+        {/* <Route path="/donordash/donate" element={<DDonate />} /> */}
         <Route path="/needydash" element={<NeedyDashbord />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/userprofile" element={<UserProfile />} />
