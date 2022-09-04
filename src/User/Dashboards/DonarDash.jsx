@@ -1,5 +1,6 @@
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import DDonate from "./DonorTabs/DDonate";
 import DonateItems from "./DonorTabs/DonateItems";
 
 const DonarDash = () => {
@@ -11,6 +12,9 @@ const DonarDash = () => {
     >
       <Tab eventKey="items" title="Request Items">
         <DonateItems />
+      </Tab>
+      <Tab eventKey="donate" title="Donate">
+        <DDonate />
       </Tab>
     </Tabs>
   );

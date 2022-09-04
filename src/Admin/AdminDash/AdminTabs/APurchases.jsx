@@ -100,7 +100,7 @@ const APurchases = () => {
       </div> */}
 
       <h1>UnShipped Items</h1>
-      {respData &&
+      {respData ? (
         respData.map((item) => (
           <div style={{ border: "solid" }}>
             {item.item.map((i) => (
@@ -140,7 +140,10 @@ const APurchases = () => {
               </p> */}
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <h5>no data found</h5>
+      )}
     </div>
   );
 };

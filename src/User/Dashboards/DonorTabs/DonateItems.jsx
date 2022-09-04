@@ -73,7 +73,6 @@ const DonateItems = () => {
       }
     );
     const responseData = await response.json();
-    console.log(responseData);
     setRespData(responseData.data.items);
   };
 
