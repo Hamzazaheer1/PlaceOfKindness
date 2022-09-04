@@ -18,6 +18,7 @@ const Donated = () => {
     );
     responseData = await response.json();
     setItemData(responseData.data);
+    console.log(itemdata);
   };
 
   useEffect(() => {
@@ -67,28 +68,32 @@ const Donated = () => {
         </thead>
         <tbody>
           {itemdata.map((item, index) => {
-            return (
-              <tr>
-                <td>{index + 1}</td>
-                <td>
-                  <img src={item.photo} alt="" />
-                </td>
-                <td>{item.name}</td>
-                <td>{item.category}$</td>
-                <td>{item.user[0].name}</td>
-                <td>
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault();
-                      data = item;
-                      setItemId(data);
-                    }}
-                  >
-                    Get Donation
-                  </button>
-                </td>
-              </tr>
-            );
+            if (item.given !== true) {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>
+                    <img src={item.photo} alt="" />
+                  </td>
+                  <td>{item.name}</td>
+                  <td>{item.category}$</td>
+                  <td>{item.user[0].name}</td>
+                  <td>
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        data = item;
+                        setItemId(data);
+                      }}
+                    >
+                      Get Donation
+                    </button>
+                  </td>
+                </tr>
+              );
+            } else {
+              return <h5>No data found</h5>;
+            }
           })}
         </tbody>
       </table>

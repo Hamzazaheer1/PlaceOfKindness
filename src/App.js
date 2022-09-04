@@ -24,11 +24,11 @@ import UserProfile from "./User/UserProfile/UserProfile";
 import Needy from "./shared/Needy/Needy";
 import DonarDash from "./User/Dashboards/DonarDash";
 // import NeedyDash from "./User/Dashboards/NeedyDash";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import ForgotPass from "./shared/ForgotPass/ForgotPass";
 import ChangePass from "./shared/ForgotPass/ChangePass";
 import NeedyDashbord from "./User/Dashboards/NeedyDashbord";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 let logUser;
 let jwt;
@@ -46,6 +46,7 @@ if (localStorage.donator) {
   logUser = jwtDecode(jwt);
 }
 function App() {
+  // eslint-disable-next-line
   const [user, setUser] = useState(logUser);
 
   console.log(user);

@@ -1,39 +1,11 @@
-# Getting Started with Create React App
+# Steps to follow to run the project
 
-This project was bootstrapped with [Create React App]
+1 - Download the project in your pc
+2 - In the root directory open cmd and type npm install
+3 - then type npm start in the same directory
 
-## Available Scripts
+## You can also test the project on herokuu
 
-In the project directory, you can run:
+in Browser opne [https://placeofkindness.herokuapp.com/]
 
-### `npm install`
-
-Download the code and in the root directory run this command to install all the dependencies.
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
+**Note: The Project is not completed yet once it complete it will be mentioned here!**

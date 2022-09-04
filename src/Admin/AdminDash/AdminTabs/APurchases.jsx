@@ -7,49 +7,43 @@ const APurchases = () => {
   }
   const bearer = "Bearer " + jwt;
 
-  const [shipped, setShipped] = useState(false);
-  const [commentId, setCommentId] = useState("");
+  // const [shipped, setShipped] = useState(false);
+  // const [commentId, setCommentId] = useState("");
   const [respData, setRespData] = useState([]);
 
-  let response;
-  let responseData;
-  const getItems = async () => {
-    response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/needyitem/unshipped",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      }
-    );
-    responseData = await response.json();
-    setRespData(responseData.data);
-  };
-
   useEffect(() => {
+    const getItems = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/needyitem/unshipped",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setRespData(responseData.data);
+    };
+
     getItems();
-  }, []);
+  }, [bearer]);
 
-  const updateItems = (a, b) => {
-    setShipped(b);
-    setCommentId(a);
-  };
+  // const updateItems = (a) => {
+  //   // setShipped(b);
+  //   setCommentId(a);
+  // };
 
-  const commentUpdateHandler = async (event) => {
-    event.preventDefault();
+  const commentUpdateHandler = async (x) => {
     try {
       const response = await fetch(
-        `https://placeofkindness-server.herokuapp.com/api/v1/needyitem/updateonepurchasing/${commentId}`,
+        `https://placeofkindness-server.herokuapp.com/api/v1/needyitem//itemshiptoneedy/${x}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: bearer,
           },
-          body: JSON.stringify({
-            shipped: shipped,
-          }),
         }
       );
 
@@ -88,7 +82,7 @@ const APurchases = () => {
     <div>
       <h1>Admin Purchases Panel</h1>
       <br />
-      <h1>Update Item</h1>
+      {/* <h1>Update Item</h1>
       <div>
         <form>
           <input
@@ -103,7 +97,7 @@ const APurchases = () => {
           <button onClick={commentUpdateHandler}>Update</button>
           <br />
         </form>
-      </div>
+      </div> */}
 
       <h1>UnShipped Items</h1>
       {respData &&
@@ -119,7 +113,7 @@ const APurchases = () => {
             <div style={{ display: "flex" }}>
               <p
                 onClick={() => {
-                  updateItems(item._id, item.shipped);
+                  commentUpdateHandler(item._id);
                 }}
                 style={{
                   boarder: "solid",
