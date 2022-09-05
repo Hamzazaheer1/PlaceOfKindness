@@ -25,7 +25,10 @@ const RequestDona = () => {
           itemData.map((item) => (
             <div style={{ border: "solid" }}>
               <p>{item.title}</p>
-              <p>{item.amount}</p>
+              <p>
+                {item.amount}
+                <b>pkr</b>
+              </p>
               <p>{item.description}</p>
               <p>{item.createdAt}</p>
               <p>{item.paymentacc}</p>

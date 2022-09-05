@@ -1,15 +1,16 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./MyNavbar.css";
 
 const MyNavbar = (user) => {
   let x;
-  if (localStorage.getItem("donator")) {
-    x = "donator";
-  } else if (localStorage.getItem("needy")) {
-    x = "needy";
-  } else if (localStorage.getItem("token")) {
-    x = "token";
+  if (localStorage.donator) {
+    x = localStorage.getItem("donator");
+  } else if (localStorage.needy) {
+    x = localStorage.getItem("needy");
+  } else if (localStorage.token) {
+    x = localStorage.getItem("token");
   }
 
   return (

@@ -36,7 +36,7 @@ const NeedyPurchases = () => {
       }
     );
     const responseData = await response.json();
-    // console.log("un sent is ", responseData);
+    //console.log("un sent is ", responseData);
     setRespDataUnspent(responseData.data);
   };
 
@@ -51,8 +51,9 @@ const NeedyPurchases = () => {
       }
     );
     const responseData = await response.json();
-    // console.log("needy sent items is ", responseData);
-    setRespDataSpent(responseData.data.requests);
+
+    console.log("needy Sent item is ", responseData.data);
+    setRespDataSpent(responseData.data);
   };
 
   useEffect(() => {
@@ -69,7 +70,13 @@ const NeedyPurchases = () => {
           {spent ? (
             spent.map((item) => (
               <div>
-                <h5>item1</h5>
+                {item.shipped && (
+                  <div>
+                    <h4>{item.id}</h4>
+                    {/* <h4>{item.item[0].name}</h4> */}
+                    {item.shipped ? <h5>Shipped</h5> : <h5>UnShipped</h5>}
+                  </div>
+                )}
               </div>
             ))
           ) : (
@@ -81,10 +88,14 @@ const NeedyPurchases = () => {
           {unspent ? (
             unspent.map((item) => (
               <div>
-                <h5>{item.createdAt}</h5>
-                {item.shipped ? <h5>"Shipped"</h5> : <h5>UnShipped</h5>}
-                <h5>{item.shipaddress}</h5>
-                <h5>{item.createdAt}</h5>
+                {!item.shipped && (
+                  <div>
+                    <h5>{item.createdAt}</h5>
+                    {item.shipped ? <h5>Shipped</h5> : <h5>UnShipped</h5>}
+                    <h5>{item.shipaddress}</h5>
+                    <h5>{item.createdAt}</h5>
+                  </div>
+                )}
               </div>
             ))
           ) : (

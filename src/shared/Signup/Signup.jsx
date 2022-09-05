@@ -34,6 +34,7 @@ const Signup = () => {
       }
       alert(responseData.message);
       console.log(responseData);
+      window.location = "/login";
       // auth.login();
     } catch (err) {
       console.log(err);

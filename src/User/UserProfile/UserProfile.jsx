@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import Logout from "../../shared/Logout/Logout";
 
 let jwt;
 if (localStorage.donator) {
@@ -62,6 +63,9 @@ const UserProfile = () => {
         throw new Error(responseData.message);
       }
       alert("Password Changed Sucessfully!!");
+      localStorage.removeItem("token");
+      localStorage.removeItem("donator");
+      localStorage.removeItem("needy");
       window.location = "/login";
     } catch (err) {
       console.log(err);
@@ -71,8 +75,12 @@ const UserProfile = () => {
   const profileUpdateHandler = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("photo", image);
+    if (name) {
+      formData.append("name", name);
+    } else if (image) {
+      formData.append("photo", image);
+    }
+
     try {
       const response = await fetch(
         "https://placeofkindness-server.herokuapp.com/api/v1/users/updateMe",
@@ -118,6 +126,7 @@ const UserProfile = () => {
             required
             onChange={(e) => setName(e.target.value)}
             placeholder={"Enter New Name"}
+            //value={respData.name}
           />
           <br />
           <br />

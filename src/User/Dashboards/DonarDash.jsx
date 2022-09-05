@@ -10,10 +10,10 @@ const DonarDash = () => {
       id="uncontrolled-tab-example"
       className="mb-3"
     >
-      <Tab eventKey="items" title="Request Items">
+      <Tab eventKey="items" title="Donate Item">
         <DonateItems />
       </Tab>
-      <Tab eventKey="donate" title="Donate">
+      <Tab eventKey="donate" title="Donate Money">
         <DDonate />
       </Tab>
     </Tabs>

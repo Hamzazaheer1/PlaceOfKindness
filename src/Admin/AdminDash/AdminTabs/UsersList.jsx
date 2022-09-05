@@ -67,7 +67,7 @@ const UsersList = () => {
             Authorization: bearer,
           },
           body: JSON.stringify({
-            temprole: userRole,
+            role: userRole,
           }),
         }
       );

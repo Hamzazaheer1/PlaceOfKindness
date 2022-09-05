@@ -27,7 +27,6 @@ const Login = () => {
         alert(responseData.message);
         throw new Error(responseData.message);
       }
-      //localStorage.setItem(x, responseData.token);
       alert(responseData.data.role);
       if (responseData.data.role === "donator") {
         localStorage.setItem("donator", responseData.token);
@@ -35,6 +34,8 @@ const Login = () => {
       } else if (responseData.data.role === "needy") {
         localStorage.setItem("needy", responseData.token);
         window.location = "/needydash";
+      } else if (responseData.data.role === "unverified") {
+        alert("Not Verified yet....");
       } else {
         localStorage.setItem("token", responseData.token);
         window.location = "/admindash";

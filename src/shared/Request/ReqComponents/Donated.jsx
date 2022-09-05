@@ -1,29 +1,53 @@
 import React, { useEffect, useState } from "react";
-//import { Card } from "react-bootstrap";
 import "./Donated.css";
 
 const Donated = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("needy");
   const bearer = "Bearer " + token;
-  let data;
   const [itemdata, setItemData] = useState([]);
-  const [itemId, setItemId] = useState(null);
+  const [RespData, setRespData] = useState([]);
+  const [itemId, setItemId] = useState("");
   const [address, setAddress] = useState("");
-
-  let response;
-  let responseData;
-  const getItems = async () => {
-    response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/items/"
-    );
-    responseData = await response.json();
-    setItemData(responseData.data);
-    console.log(itemdata);
-  };
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
+    const getItems = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/items/"
+      );
+      const responseData = await response.json();
+      setItemData(responseData.data);
+    };
+
     getItems();
   });
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/users/getme",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setRespData(responseData.data);
+    };
+
+    getProfile();
+  }, [bearer]);
+
+  const dataHandler = (a, b, c, d) => {
+    setItemId(a);
+    setImage(b);
+    setName(c);
+    setCategory(d);
+  };
 
   const getDonationHandler = async (event) => {
     event.preventDefault();
@@ -47,99 +71,64 @@ const Donated = () => {
         alert(responseData.message);
         throw new Error(responseData.message);
       }
-      alert(responseData.data.role);
+      alert("You will get item soon");
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <React.Fragment>
-      <table style={{ marginLeft: "5rem" }}>
-        <thead>
-          <tr>
-            <th>Position</th>
-            <th>Profile</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Donated By</th>
-            <th>Get Donation</th>
-          </tr>
-        </thead>
-        <tbody>
-          {itemdata.map((item, index) => {
-            if (item.given !== true) {
-              return (
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>
-                    <img src={item.photo} alt="" />
-                  </td>
-                  <td>{item.name}</td>
-                  <td>{item.category}$</td>
-                  <td>{item.user[0].name}</td>
-                  <td>
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        data = item;
-                        setItemId(data);
-                      }}
-                    >
-                      Get Donation
-                    </button>
-                  </td>
-                </tr>
-              );
-            } else {
-              return <h5>No data found</h5>;
-            }
-          })}
-        </tbody>
-      </table>
-
+    <div>
+      <h1>Enter Details below to get specific item</h1>
+      <p>Click on Select Item before clicking get Donation</p>
       <div>
-        {itemId && (
-          <div style={{ marginLeft: "4.5rem" }}>
-            <br />
-            <br />
-            <br />
-            <h1>Fill the form below to get the Item</h1>
-            <br />
-            <p>{itemId.photo}</p>
-            <p>{itemId.name}</p>
-            <p>{itemId.category}</p>
-            <form>
-              <label>
-                Enter your Shipping Address:
-                <input
-                  type="text"
-                  required
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </label>
-              <button onClick={getDonationHandler}>Get Donation</button>
-            </form>
-          </div>
-        )}
+        <h5>{<img src={image} alt="notFound"></img>}</h5>
+        <h5>{name}</h5>
+        <h5>{category}</h5>
       </div>
-    </React.Fragment>
+      {RespData.role != "unverified" && (
+        <form>
+          <label>
+            Enter your Shipping Address:
+            <input
+              type="text"
+              required
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <button onClick={getDonationHandler}>Get Donation</button>
+        </form>
+      )}
+
+      <h1>List of Donated Items</h1>
+      {itemdata &&
+        itemdata.map((item) => (
+          <div>
+            {!item.given && item.available && (
+              <div>
+                <h5>{<img src={item.photo} alt="notFound" />}</h5>
+                <h5>{item.name}</h5>
+                <h5>{item.category}</h5>
+                <h5>{item.user[0].name}</h5>
+                <p
+                  onClick={() => {
+                    dataHandler(item.id, item.photo, item.name, item.category);
+                  }}
+                  style={{
+                    boarder: "solid",
+                    backgroundColor: "grey",
+                    color: "white",
+                    width: "8vw",
+                  }}
+                >
+                  Select Item
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+    </div>
   );
-
-  // const renderCard = (item, index) => {
-  //   return (
-  //     <Card key={index} className="box" style={{ width: "1rem" }}>
-  //       <Card.Img variant="top" src={item.image} />
-  //       <Card.Body>
-  //         <Card.Title>{card.title}</Card.Title>
-  //         <Card.Text>{card.text}</Card.Text>
-  //       </Card.Body>
-  //     </Card>
-  //   );
-
-  // };
-
-  // return <div className="grid">{cardInfo.map(renderCard)}</div>;
 };
 
 export default Donated;

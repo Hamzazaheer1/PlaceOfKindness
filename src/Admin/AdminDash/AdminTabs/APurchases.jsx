@@ -100,6 +100,7 @@ const APurchases = () => {
       </div> */}
 
       <h1>UnShipped Items</h1>
+      {console.log(respData)}
       {respData ? (
         respData.map((item) => (
           <div style={{ border: "solid" }}>
