@@ -8,8 +8,6 @@ const NeedyUsers = () => {
   const bearer = "Bearer " + jwt;
 
   const [respData, setRespData] = useState([]);
-  const [userRole, setUserRole] = useState("");
-  const [userId, setUserId] = useState("");
 
   let response;
   let responseData;
@@ -24,18 +22,12 @@ const NeedyUsers = () => {
       }
     );
     responseData = await response.json();
-    console.log(responseData);
     setRespData(responseData.data);
   };
 
   useEffect(() => {
     getDonors();
   }, []);
-
-  // const updateRoleId = (a, b) => {
-  //   setUserRole(b);
-  //   setUserId(a);
-  // };
 
   const userUpdateHandler = async (x) => {
     try {
@@ -47,9 +39,6 @@ const NeedyUsers = () => {
             "Content-Type": "application/json",
             Authorization: bearer,
           },
-          // body: JSON.stringify({
-          //   role: userRole,
-          // }),
         }
       );
 
@@ -66,20 +55,6 @@ const NeedyUsers = () => {
 
   return (
     <div>
-      {/* <h1>Give User Role</h1>
-      <div>
-        <form>
-          <input
-            type="text"
-            required
-            onChange={(e) => setUserRole(e.target.value)}
-            placeholder={"UserRole"}
-            value={userRole}
-          />
-          <br />
-          <button onClick={userUpdateHandler}>Update</button>
-        </form>
-      </div> */}
       <h1>List of Unvarified Needy Users</h1>
       {respData &&
         respData.map((item) => (

@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 const DDonate = () => {
   const keyValue = window.location.search;
   const urlParams = new URLSearchParams(keyValue);
-  // setParam1(urlParams.get("user"));
-  // setParam2(urlParams.get("amount"));
   const [param1, setParam1] = useState(urlParams.get("user"));
   const [param2, setParam2] = useState(urlParams.get("amount"));
   console.log(param1);

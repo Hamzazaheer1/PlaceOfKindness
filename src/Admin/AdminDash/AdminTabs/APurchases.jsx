@@ -7,8 +7,6 @@ const APurchases = () => {
   }
   const bearer = "Bearer " + jwt;
 
-  // const [shipped, setShipped] = useState(false);
-  // const [commentId, setCommentId] = useState("");
   const [respData, setRespData] = useState([]);
 
   useEffect(() => {
@@ -28,11 +26,6 @@ const APurchases = () => {
 
     getItems();
   }, [bearer]);
-
-  // const updateItems = (a) => {
-  //   // setShipped(b);
-  //   setCommentId(a);
-  // };
 
   const commentUpdateHandler = async (x) => {
     try {
@@ -58,47 +51,10 @@ const APurchases = () => {
     }
   };
 
-  //   const itemDeleteHandler = async (x) => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://placeofkindness-server.herokuapp.com/api/v1/needyitem/deletepurchasing/${x}`,
-  //         {
-  //           method: "DELETE",
-  //           headers: {
-  //             Authorization: bearer,
-  //           },
-  //         }
-  //       );
-
-  //       if (response.status === 204) {
-  //         alert("Item Deleted Sucessfully!!!!");
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
   return (
     <div>
       <h1>Admin Purchases Panel</h1>
       <br />
-      {/* <h1>Update Item</h1>
-      <div>
-        <form>
-          <input
-            type="text"
-            required
-            onChange={(e) => setShipped(e.target.value)}
-            placeholder={"True or False"}
-            value={shipped}
-          />
-          <br />
-
-          <button onClick={commentUpdateHandler}>Update</button>
-          <br />
-        </form>
-      </div> */}
-
       <h1>UnShipped Items</h1>
       {console.log(respData)}
       {respData ? (
@@ -125,20 +81,6 @@ const APurchases = () => {
               >
                 Update
               </p>
-              {/* <p>&nbsp;&nbsp;</p>
-              <p
-                onClick={() => {
-                  itemDeleteHandler(item.id);
-                }}
-                style={{
-                  boarder: "solid",
-                  backgroundColor: "grey",
-                  color: "white",
-                  width: "3vw",
-                }}
-              >
-                Delete
-              </p> */}
             </div>
           </div>
         ))

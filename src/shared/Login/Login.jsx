@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import DonarDash from "../../User/Dashboards/DonarDash";
-
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import "./Login.css";
-
+import Alert from "react-bootstrap/Alert";
 const Login = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -28,6 +32,7 @@ const Login = () => {
         throw new Error(responseData.message);
       }
       alert(responseData.data.role);
+
       if (responseData.data.role === "donator") {
         localStorage.setItem("donator", responseData.token);
         window.location = "/donordash";
@@ -50,42 +55,85 @@ const Login = () => {
   };
 
   return (
-    <React.Fragment>
-      <div className="login-div">
-        <div className="main_div">
-          <div className="login-box">
-            <h1>Sign in Here</h1>
-            <form method="" action="">
-              <div className="inputBox">
-                <label>username</label>
-                <input
-                  type="text"
-                  name="username"
-                  autoComplete="off"
+    <Container>
+      <Row>
+        <Col></Col>
+        <Col>
+          <div style={{ marginTop: "5rem", marginBottom: "13rem" }}>
+            <Form>
+              <h1>Sign In</h1>
+              <Form.Group className="mb-3 mt-4" controlId="Email">
+                <Form.Label>Email address | Username</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email or username"
                   required
                   onChange={(e) => setUsername(e.target.value)}
                 />
-              </div>
-              <div className="inputBox">
-                <label>password</label>
-                <input
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="Password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
                   type="password"
-                  name="password"
-                  autoComplete="off"
+                  placeholder="Password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-              </div>
-            </form>
-            <button onClick={authSubmitHandler}>Sign in</button>
-            <p style={{ color: "white" }} onClick={forgotHandler}>
-              Forgot Password
-            </p>
+              </Form.Group>
+              <Button variant="dark" onClick={authSubmitHandler}>
+                Signin
+              </Button>
+              <br />
+              <br />
+              <p onClick={forgotHandler}>
+                <b>Forgot Password</b>
+              </p>
+            </Form>
           </div>
-        </div>
-      </div>
-      <br />
-    </React.Fragment>
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
+    // <React.Fragment>
+    //   <div className="login-div">
+    //     <div className="main_div">
+    //       <div className="login-box">
+    //         <h1>Sign in Here</h1>
+    //         <form method="" action="">
+    //           <div className="inputBox">
+    //             <label>username</label>
+    //             <input
+    //               type="text"
+    //               name="username"
+    //               autoComplete="off"
+    //               required
+    //               onChange={(e) => setUsername(e.target.value)}
+    //             />
+    //           </div>
+    //           <div className="inputBox">
+    //             <label>password</label>
+    //             <input
+    //               type="password"
+    //               name="password"
+    //               autoComplete="off"
+    //               required
+    //               onChange={(e) => setPassword(e.target.value)}
+    //             />
+    //           </div>
+    //         </form>
+    //         <button onClick={authSubmitHandler}>Sign in</button>
+    //         <p style={{ color: "white" }} onClick={forgotHandler}>
+    //           Forgot Password
+    //         </p>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <br />
+    // </React.Fragment>
   );
 };
 

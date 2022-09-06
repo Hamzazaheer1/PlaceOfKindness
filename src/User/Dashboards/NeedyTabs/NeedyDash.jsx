@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 
 const NeedyDash = () => {
   let token;
@@ -12,7 +16,6 @@ const NeedyDash = () => {
   const [amount, setAmount] = useState(0);
   const [paymentAc, setPaymentAc] = useState("");
   const [respData, setRespData] = useState([]);
-  const [reqId, setReqId] = useState("");
 
   const reqDonationHandler = async (event) => {
     event.preventDefault();
@@ -65,37 +68,6 @@ const NeedyDash = () => {
     }
   };
 
-  // const updateReqHandler = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await fetch(
-  //       `https://placeofkindness-server.herokuapp.com/api/v1/request/${reqId}`,
-  //       {
-  //         method: "PATCH",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: bearer,
-  //         },
-  //         body: JSON.stringify({
-  //           title: title,
-  //           description: description,
-  //           amount: amount,
-  //           paymentacc: paymentAc,
-  //         }),
-  //       }
-  //     );
-
-  //     const responseData = await response.json();
-  //     if (!response.ok) {
-  //       alert(responseData.message);
-  //       throw new Error(responseData.message);
-  //     }
-  //     alert("Request Updated Sucessfully!!!!");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const getProfile = async () => {
     const response = await fetch(
       "https://placeofkindness-server.herokuapp.com/api/v1/users/getme",
@@ -114,124 +86,144 @@ const NeedyDash = () => {
     getProfile();
   }, []);
 
-  // const updateReqId = (a, b, c, d, e) => {
-  //   setReqId(a);
-  //   setTitle(b);
-  //   setDescription(c);
-  //   setAmount(d);
-  //   setPaymentAc(e);
-  // };
-
   return (
     <div>
-      <h1>Welcome to Needy Dashboard</h1>
-      <div>
-        <h3>Request Donation(Money)</h3>
-        <div>
-          <form>
-            <input
+      <h1>Welcome to Needy Panel</h1>
+      <Container>
+        <br />
+        <Form>
+          <h2>Request Item</h2>
+          <br />
+          <Form.Group className="mb-3" controlId="address">
+            <Form.Control
               type="text"
               required
               onChange={(e) => setTitle(e.target.value)}
               placeholder={"Enter Title"}
             />
             <br />
-            <input
+            <Form.Control
               type="text"
               required
               onChange={(e) => setDescription(e.target.value)}
               placeholder={"Enter description"}
             />
             <br />
-            <input
+            <Form.Control
               type="text"
               required
               onChange={(e) => setAmount(e.target.value)}
               placeholder={"Enter Amount"}
             />
             <br />
-            <input
+            <Form.Control
               type="text"
               required
               onChange={(e) => setPaymentAc(e.target.value)}
               placeholder={"Enter Payment Receive Account"}
             />
             <br />
-            <button onClick={reqDonationHandler}>Submit</button>
-          </form>
-        </div>
-      </div>
-      <br />
-      {/* <div>
-        <h3>Update Existing Request</h3>
-        <div>
-          <form>
-            <input
-              type="text"
-              required
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder={"Enter Title"}
-              value={title}
-            />
-            <br />
-            <input
-              type="text"
-              required
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder={"Enter description"}
-              value={description}
-            />
-            <br />
-            <input
-              type="text"
-              required
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder={"Enter Amount"}
-              value={amount}
-            />
-            <br />
-            <input
-              type="text"
-              required
-              onChange={(e) => setPaymentAc(e.target.value)}
-              placeholder={"Enter Payment Receive Account"}
-              value={paymentAc}
-            />
-            <br />
-            <button onClick={updateReqHandler}>Update</button>
-          </form>
-        </div>
-      </div> */}
-      <br />
-      <h3>Requested Donations by Needy</h3>
-      {respData ? (
-        respData.map((item) => (
-          <div
-            style={{ marginLeft: "2rem", marginTop: "1rem", border: "solid" }}
-          >
-            <p>{item.title}</p>
-            <p>{item.description}</p>
-            <p>{item.amount}</p>
-            <p>{item.paymentacc}</p>
-            <p
-              onClick={() => {
-                reqDeleteHandler(item.id);
-              }}
-              style={{
-                boarder: "solid",
-                backgroundColor: "grey",
-                color: "white",
-                width: "3vw",
-              }}
-            >
-              Delete
-            </p>
-          </div>
-        ))
-      ) : (
-        <p>no data found</p>
-      )}
+          </Form.Group>
+          <Button variant="dark" onClick={reqDonationHandler}>
+            Submit
+          </Button>
+        </Form>
+        <br />
+        <br />
+        <h2>List of Requests</h2>
+        {respData ? (
+          respData.map((item) => (
+            <Alert variant={"dark"}>
+              <b>{item.title}</b>
+              <p>{item.description}</p>
+              <p>{item.amount}</p>
+              <p>{item.paymentacc}</p>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  reqDeleteHandler(item.id);
+                }}
+              >
+                Delete
+              </Button>
+            </Alert>
+          ))
+        ) : (
+          <h4>No Requests Found</h4>
+        )}
+      </Container>
     </div>
+    //old
+    // <div>
+    //   <h1>Welcome to Needy Dashboard</h1>
+    //   <div>
+    //     <h3>Request Donation(Money)</h3>
+    //     <div>
+    //       <form>
+    //         <input
+    //           type="text"
+    //           required
+    //           onChange={(e) => setTitle(e.target.value)}
+    //           placeholder={"Enter Title"}
+    //         />
+    //         <br />
+    //         <input
+    //           type="text"
+    //           required
+    //           onChange={(e) => setDescription(e.target.value)}
+    //           placeholder={"Enter description"}
+    //         />
+    //         <br />
+    //         <input
+    //           type="text"
+    //           required
+    //           onChange={(e) => setAmount(e.target.value)}
+    //           placeholder={"Enter Amount"}
+    //         />
+    //         <br />
+    //         <input
+    //           type="text"
+    //           required
+    //           onChange={(e) => setPaymentAc(e.target.value)}
+    //           placeholder={"Enter Payment Receive Account"}
+    //         />
+    //         <br />
+    //         <button onClick={reqDonationHandler}>Submit</button>
+    //       </form>
+    //     </div>
+    //   </div>
+    //   <br />
+
+    //   <br />
+    //   <h3>Requested Donations by Needy</h3>
+    //   {respData ? (
+    //     respData.map((item) => (
+    //       <div
+    //         style={{ marginLeft: "2rem", marginTop: "1rem", border: "solid" }}
+    //       >
+    //         <p>{item.title}</p>
+    //         <p>{item.description}</p>
+    //         <p>{item.amount}</p>
+    //         <p>{item.paymentacc}</p>
+    //         <p
+    //           onClick={() => {
+    //             reqDeleteHandler(item.id);
+    //           }}
+    //           style={{
+    //             boarder: "solid",
+    //             backgroundColor: "grey",
+    //             color: "white",
+    //             width: "3vw",
+    //           }}
+    //         >
+    //           Delete
+    //         </p>
+    //       </div>
+    //     ))
+    //   ) : (
+    //     <p>no data found</p>
+    //   )}
+    // </div>
   );
 };
 

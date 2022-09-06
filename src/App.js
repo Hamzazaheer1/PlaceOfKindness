@@ -91,24 +91,26 @@ function App() {
         value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
       >
         <BrowserRouter>
-          <MyNavbar user={user} />
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/needy" element={<Needy />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/request" element={<Request />} />
-            <Route path="/donateditems" element={<Donated />} />
-            <Route path="/reqdonation" element={<RequestDona />} />
-            <Route path="/getdonation" element={<GetDonation />} />
-            <Route path="/forumcomments" element={<ForumComment />} />
-            <Route path="/forgotpass" element={<ForgotPass />} />
-            <Route path="/changepass/:token" element={<ChangePass />} />
-            {routes}
-            {/* <Route path="/login" element={<Login />} />
+          <div className="content-wrap">
+            <MyNavbar user={user} />
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/needy" element={<Needy />} />
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/request" element={<Request />} />
+              <Route path="/donateditems" element={<Donated />} />
+              <Route path="/reqdonation" element={<RequestDona />} />
+              <Route path="/getdonation" element={<GetDonation />} />
+              <Route path="/forumcomments" element={<ForumComment />} />
+              <Route path="/forgotpass" element={<ForgotPass />} />
+              <Route path="/changepass/:token" element={<ChangePass />} />
+              {routes}
+              {/* <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/admindash" element={<AdminDash />} />
             <Route path="/userdash" element={<UserDash />} /> */}
-          </Routes>
+            </Routes>
+          </div>
           <Footer />
         </BrowserRouter>
       </AuthContext.Provider>

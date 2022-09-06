@@ -1,6 +1,9 @@
 import React, { useState, useEffect, Children } from "react";
 import ForumComment from "./ForumComment";
-
+import Alert from "react-bootstrap/Alert";
+import { Container, Row, Col } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 const Forum = () => {
   let jwt;
   if (localStorage.donator) {
@@ -69,51 +72,110 @@ const Forum = () => {
   };
 
   return (
-    <div style={{ marginLeft: "2rem", marginTop: "1rem" }}>
+    <Container>
       <h1>Forum</h1>
-      <div>
-        <br />
-        <br />
-        <h2>Create New Thread</h2>
-        <form>
-          <input
-            type="text"
-            required
-            onChange={(e) => setThread(e.target.value)}
-            placeholder={"Enter your thought..."}
-            style={{ width: "50rem" }}
-          />
-          <br />
-          <input
-            type="text"
-            required
-            onChange={(e) => setThreadDesc(e.target.value)}
-            placeholder={"Enter Desc"}
-            style={{ width: "50rem" }}
-          />
-          <br />
-          <button onClick={commentPostHandler}>Submit</button>
-        </form>
-      </div>
+      <Container style={{ marginBottom: "4rem" }}>
+        <h2 style={{ marginTop: "2rem" }}>Create New Thread</h2>
+        <Row>
+          <Col md={8}>
+            {jwt ? (
+              <Form>
+                <Form.Group className="mb-3" controlId="address">
+                  <Form.Control
+                    type="text"
+                    required
+                    onChange={(e) => setThread(e.target.value)}
+                    placeholder={"Enter your thought..."}
+                  />
+                  <br />
+                  <Form.Control
+                    type="text"
+                    required
+                    onChange={(e) => setThreadDesc(e.target.value)}
+                    placeholder={"Enter Desc"}
+                  />
+                </Form.Group>
+                <Button variant="dark">Post a Thread</Button>
+              </Form>
+            ) : (
+              <h5>You Need to be loged in to post a thread....</h5>
+            )}
+          </Col>
+        </Row>
+      </Container>
 
-      <div style={{ border: "solid", marginTop: "2rem" }}>
-        {itemData.map((item) => (
-          <div key={item.id}>
-            <p>{item.user[0].name}</p>
-            <h3
-              onClick={() => {
-                {
-                  itemidHandler(item.id, item.title);
-                }
-              }}
-            >
-              {item.title}
-            </h3>
-            <p>{item.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+      <Container>
+        <h2>Posted Threads</h2>
+        {itemData &&
+          itemData.map((item, index) => (
+            <Alert variant={"dark"}>
+              <b>Post {index + 1}</b>
+              <p>{item.user[0].name}</p>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  {
+                    itemidHandler(item.id, item.title);
+                  }
+                }}
+              >
+                Show Comments
+              </Button>
+            </Alert>
+          ))}
+      </Container>
+    </Container>
+    // <div style={{ marginLeft: "2rem", marginTop: "1rem" }}>
+    //   <h1>Forum</h1>
+    //   <div>
+    //     <br />
+    //     <br />
+    //     {jwt && (
+    //       <div>
+    //         <h2>Create New Thread</h2>
+    //         <form>
+    //           <input
+    //             type="text"
+    //             required
+    //             onChange={(e) => setThread(e.target.value)}
+    //             placeholder={"Enter your thought..."}
+    //             style={{ width: "50rem" }}
+    //           />
+    //           <br />
+    //           <input
+    //             type="text"
+    //             required
+    //             onChange={(e) => setThreadDesc(e.target.value)}
+    //             placeholder={"Enter Desc"}
+    //             style={{ width: "50rem" }}
+    //           />
+    //           <br />
+    //           <button onClick={commentPostHandler}>Submit</button>
+    //         </form>
+    //       </div>
+    //     )}
+    //   </div>
+
+    //   <div style={{ border: "solid", marginTop: "2rem" }}>
+    //     {itemData.map((item) => (
+    //       <div key={item.id}>
+    //         <p>{item.user[0].name}</p>
+    //         <h3
+    //           onClick={() => {
+    //             {
+    //               itemidHandler(item.id, item.title);
+    //             }
+    //           }}
+    //         >
+    //           {item.title}
+    //         </h3>
+    //         <p>{item.description}</p>
+    //       </div>
+    //     ))}
+    //   </div>
+    // </div>
   );
 };
 

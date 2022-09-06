@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 
 const NeedyPosts = () => {
   let token;
@@ -29,22 +33,36 @@ const NeedyPosts = () => {
 
   console.log(respData);
   return (
-    <div>
+    <Container>
       <h3>Your Posts</h3>
       {respData ? (
         respData.map((item) => (
-          <div
-            style={{ marginLeft: "2rem", marginTop: "1rem", border: "solid" }}
-          >
+          <Alert variant={"dark"}>
             <p>{item.title}</p>
             <p>{item.description}</p>
             <p>{item.createdAt}</p>
-          </div>
+          </Alert>
         ))
       ) : (
-        <p>no data found</p>
+        <p>no posts found</p>
       )}
-    </div>
+    </Container>
+    // <div>
+    //   <h3>Your Posts</h3>
+    //   {respData ? (
+    //     respData.map((item) => (
+    //       <div
+    //         style={{ marginLeft: "2rem", marginTop: "1rem", border: "solid" }}
+    //       >
+    //         <p>{item.title}</p>
+    //         <p>{item.description}</p>
+    //         <p>{item.createdAt}</p>
+    //       </div>
+    //     ))
+    //   ) : (
+    //     <p>no data found</p>
+    //   )}
+    // </div>
   );
 };
 

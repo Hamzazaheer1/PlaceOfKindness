@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./Donated.css";
+//import "./Donated.css";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import { Container, Row, Col } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Donated = () => {
   const token = localStorage.getItem("needy");
@@ -11,6 +16,8 @@ const Donated = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
+  const [empty, setEmpty] = useState("No data Found");
+  let count = 0;
 
   useEffect(() => {
     const getItems = async () => {
@@ -79,55 +86,146 @@ const Donated = () => {
 
   return (
     <div>
-      <h1>Enter Details below to get specific item</h1>
-      <p>Click on Select Item before clicking get Donation</p>
-      <div>
-        <h5>{<img src={image} alt="notFound"></img>}</h5>
-        <h5>{name}</h5>
-        <h5>{category}</h5>
-      </div>
-      {RespData.role != "unverified" && (
-        <form>
-          <label>
-            Enter your Shipping Address:
-            <input
-              type="text"
-              required
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </label>
-          <button onClick={getDonationHandler}>Get Donation</button>
-        </form>
-      )}
-
-      <h1>List of Donated Items</h1>
-      {itemdata &&
-        itemdata.map((item) => (
-          <div>
-            {!item.given && item.available && (
-              <div>
-                <h5>{<img src={item.photo} alt="notFound" />}</h5>
-                <h5>{item.name}</h5>
-                <h5>{item.category}</h5>
-                <h5>{item.user[0].name}</h5>
-                <p
-                  onClick={() => {
-                    dataHandler(item.id, item.photo, item.name, item.category);
-                  }}
-                  style={{
-                    boarder: "solid",
-                    backgroundColor: "grey",
-                    color: "white",
-                    width: "8vw",
-                  }}
-                >
-                  Select Item
-                </p>
-              </div>
+      <Container style={{ marginBottom: "4rem" }}>
+        <h1>Enter Details below to get specific item</h1>
+        <p>Click on Select Item before clicking get Donation</p>
+        <Row>
+          <Col md={8}>
+            {RespData && RespData.role === "needy" ? (
+              <Form>
+                <Form.Group className="mb-3" controlId="address">
+                  <Form.Label>Shipping Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter address"
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                  <Form.Text className="text-muted">
+                    Re'check the address before clicking Get Donation.
+                  </Form.Text>
+                </Form.Group>
+                <Button variant="dark" onClick={getDonationHandler}>
+                  Get Donation
+                </Button>
+              </Form>
+            ) : (
+              <h5>Only Needy can get the items</h5>
             )}
-          </div>
-        ))}
+          </Col>
+          <Col md={4}>
+            <Card style={{ width: "18rem", color: "white" }} bg={"dark"}>
+              <Card.Img
+                variant="top"
+                src={image}
+                alt="notFound"
+                height={"210px"}
+              />
+              <ListGroup className="list-group-flush">
+                <Card.Title>{name}</Card.Title>
+                <ListGroup.Item>{category}</ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+      <Container style={{ marginBottom: "4rem" }}>
+        <h1>List of Donated Items</h1>
+        <Row>
+          {itemdata &&
+            itemdata.map((item) => (
+              <>
+                {!item.given && item.available && (
+                  <Card
+                    style={{
+                      width: "18rem",
+                      color: "white",
+                      marginTop: "2rem",
+                      marginRight: "1rem",
+                    }}
+                    bg={"dark"}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={item.photo}
+                      alt="notFound"
+                      height={"210px"}
+                    />
+                    <ListGroup className="list-group-flush">
+                      <Card.Title>{item.name}</Card.Title>
+                      <ListGroup.Item>{item.category}</ListGroup.Item>
+                      <ListGroup.Item>{item.user[0].name}</ListGroup.Item>
+                    </ListGroup>
+                    <Card.Body>
+                      <Card.Link
+                        onClick={() => {
+                          dataHandler(
+                            item.id,
+                            item.photo,
+                            item.name,
+                            item.category
+                          );
+                        }}
+                      >
+                        Select Item
+                      </Card.Link>
+                    </Card.Body>
+                  </Card>
+                )}
+              </>
+            ))}
+        </Row>
+      </Container>
     </div>
+    // <div>
+    //   <h1>Enter Details below to get specific item</h1>
+    //   <p>Click on Select Item before clicking get Donation</p>
+    //   <div>
+    //     <h5>{<img src={image} alt="notFound"></img>}</h5>
+    //     <h5>{name}</h5>
+    //     <h5>{category}</h5>
+    //   </div>
+    //   {RespData && RespData.role === "needy" && (
+    //     <form>
+    //       <label>
+    //         Enter your Shipping Address:
+    //         <input
+    //           type="text"
+    //           required
+    //           onChange={(e) => setAddress(e.target.value)}
+    //         />
+    //       </label>
+    //       <button onClick={getDonationHandler}>Get Donation</button>
+    //     </form>
+    //   )}
+
+    //   <h1>List of Donated Items</h1>
+    //   {itemdata &&
+    //     itemdata.map((item) => (
+    //       <div>
+    //         {item.given && item.available && (
+    //           <div>
+    //             <h5>{<img src={item.photo} alt="notFound" />}</h5>
+    //             <h5>{item.name}</h5>
+    //             <h5>{item.category}</h5>
+    //             <h5>{item.user[0].name}</h5>
+    //             <p
+    //               onClick={() => {
+    //                 dataHandler(item.id, item.photo, item.name, item.category);
+    //               }}
+    //               style={{
+    //                 boarder: "solid",
+    //                 backgroundColor: "grey",
+    //                 color: "white",
+    //                 width: "8vw",
+    //               }}
+    //             >
+    //               Select Item
+    //             </p>
+    //           </div>
+    //         )}
+    //       </div>
+    //     ))}
+    // </div>
   );
 };
 
