@@ -12,32 +12,32 @@ const DonatedItems = () => {
   const [availible, setAvailible] = useState(false);
   const [given, setGiven] = useState(false);
 
-  const getItems = async () => {
-    const response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/items/"
-    );
-    const responseData = await response.json();
-    setItemData(responseData.data);
-  };
-
-  const getallunavailibleitems = async () => {
-    const response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/items/unavailableitems",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      }
-    );
-    const responseData = await response.json();
-    setItemDataUn(responseData.data);
-  };
-
   useEffect(() => {
+    const getItems = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/items/"
+      );
+      const responseData = await response.json();
+      setItemData(responseData.data);
+    };
+
+    const getallunavailibleitems = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/items/unavailableitems",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setItemDataUn(responseData.data);
+    };
+
     getItems();
     getallunavailibleitems();
-  });
+  }, [bearer]);
 
   const itemDeleteHandler = async (x) => {
     try {
