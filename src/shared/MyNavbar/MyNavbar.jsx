@@ -19,7 +19,11 @@ const MyNavbar = (user) => {
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          style={{ color: "#0092dd", fontStyle: "bold" }}
+        >
           PlaceOfKindness
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

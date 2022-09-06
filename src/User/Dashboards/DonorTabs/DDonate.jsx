@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
 
 const DDonate = () => {
   const keyValue = window.location.search;
@@ -31,7 +36,7 @@ const DDonate = () => {
     const responseData = await response.json();
     setRespData(responseData.url);
     console.log(respData);
-    window.open(respData, "_blank");
+    window.open(respData);
   };
 
   const confirmDonation = async (event) => {
@@ -62,72 +67,114 @@ const DDonate = () => {
   };
 
   return (
-    <div>
-      <h1>Donate to Place of Kindness Directly</h1>
-      <form>
-        <input
-          type="number"
-          required
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder={"Enter Amount"}
-        />
-        <br />
-        <br />
-        <button onClick={donationHandler}>Submit</button>
-        <br />
-      </form>
-
-      <button onClick={confirmDonation}>View Data of Table</button>
-      {console.log(donationRespData)}
-      {donationRespData &&
-        donationRespData.map((item, index) => (
-          <div style={{ border: "solid" }}>
-            <h5>{index + 1}</h5>
-            <h5>{item.amount}</h5>
-            <h5>{item.createdAt}</h5>
-          </div>
-        ))}
-      {/* <div>
-        <table>
+    <Container>
+      <Row className="mb-4">
+        <h1>Donate to Place of Kindness Directly</h1>
+        <Form>
+          <Form.Group className="mb-3" controlId="address">
+            <Form.Control
+              type="number"
+              required
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder={"Enter Amount"}
+            />
+          </Form.Group>
+          <Button variant="dark" onClick={donationHandler}>
+            Transfer Amount
+          </Button>
+        </Form>
+      </Row>
+      <Button variant="primary" onClick={confirmDonation}>
+        View Transactions
+      </Button>
+      <Row className="mt-4">
+        <Table striped bordered hover variant="dark">
           <thead>
             <tr>
-              <th>No.</th>
-              <th>Photo</th>
+              <th>#</th>
               <th>Amount</th>
-              <th>Created At</th>
+              <th>CreatedAt</th>
             </tr>
           </thead>
           <tbody>
-            <tbody>
-              {donationRespData.map((item, index) => {
-                if (item) {
-                  {
-                    setParam1("");
-                    setParam2(0);
-                  }
-                  return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>
-                        <img
-                          src={item.user.photo}
-                          alt=""
-                          style={{ width: "50px" }}
-                        />
-                      </td>
-                      <td>{item.amount}</td>
-                      <td>{item.createdAt}</td>
-                    </tr>
-                  );
-                } else {
-                  return <h5>No data found</h5>;
-                }
-              })}
-            </tbody>
+            {donationRespData &&
+              donationRespData.map((item, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item.amount}pkr</td>
+                  <td>{item.cratedAt}</td>
+                </tr>
+              ))}
           </tbody>
-        </table>
-      </div> */}
-    </div>
+        </Table>
+      </Row>
+    </Container>
+    // <div>
+    //   <h1>Donate to Place of Kindness Directly</h1>
+    //   <form>
+    //     <input
+    //       type="number"
+    //       required
+    //       onChange={(e) => setAmount(e.target.value)}
+    //       placeholder={"Enter Amount"}
+    //     />
+    //     <br />
+    //     <br />
+    //     <button onClick={donationHandler}>Submit</button>
+    //     <br />
+    //   </form>
+
+    //   <button onClick={confirmDonation}>View Data of Table</button>
+    //   {console.log(donationRespData)}
+    //   {donationRespData &&
+    //     donationRespData.map((item, index) => (
+    //       <div style={{ border: "solid" }}>
+    //         <h5>{index + 1}</h5>
+    //         <h5>{item.amount}</h5>
+    //         <h5>{item.createdAt}</h5>
+    //       </div>
+    //     ))}
+    //   {/* <div>
+    //     <table>
+    //       <thead>
+    //         <tr>
+    //           <th>No.</th>
+    //           <th>Photo</th>
+    //           <th>Amount</th>
+    //           <th>Created At</th>
+    //         </tr>
+    //       </thead>
+    //       <tbody>
+    //         <tbody>
+    //           {donationRespData.map((item, index) => {
+    //             if (item) {
+    //               {
+    //                 setParam1("");
+    //                 setParam2(0);
+    //               }
+    //               return (
+    //                 <tr>
+    //                   <td>{index + 1}</td>
+    //                   <td>
+    //                     <img
+    //                       src={item.user.photo}
+    //                       alt=""
+    //                       style={{ width: "50px" }}
+    //                     />
+    //                   </td>
+    //                   <td>{item.amount}</td>
+    //                   <td>{item.createdAt}</td>
+    //                 </tr>
+    //               );
+    //             } else {
+    //               return <h5>No data found</h5>;
+    //             }
+    //           })}
+    //         </tbody>
+    //       </tbody>
+    //     </table>
+    //   </div> */}
+    // </div>
   );
 };
 
