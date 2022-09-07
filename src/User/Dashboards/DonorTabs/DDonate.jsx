@@ -8,7 +8,7 @@ import Table from "react-bootstrap/Table";
 const DDonate = () => {
   const keyValue = window.location.search;
   const urlParams = new URLSearchParams(keyValue);
-  const [param1, setParam1] = useState(urlParams.get("user"));
+  const [param1, setParam1] = useState(urlParams.get("usertoken"));
   const [param2, setParam2] = useState(urlParams.get("amount"));
   console.log(param1);
   console.log(param2);
@@ -22,8 +22,8 @@ const DDonate = () => {
   const [respData, setRespData] = useState([]);
   const [donationRespData, setDonationRespData] = useState([]);
 
-  const donationHandler = async (event) => {
-    event.preventDefault();
+  const donationHandler = async () => {
+    // event.preventDefault();
     const response = await fetch(
       `https://placeofkindness-server.herokuapp.com/api/v1/donations/checkoutsession/${amount}`,
       {
@@ -35,36 +35,39 @@ const DDonate = () => {
     );
     const responseData = await response.json();
     setRespData(responseData.url);
-    console.log(respData);
+    // console.log(respData);
     window.open(respData);
   };
 
-  const confirmDonation = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch(
-        `https://placeofkindness-server.herokuapp.com/api/v1/donations/create-donations/?user=${param1}&amount=${param2}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: bearer,
-          },
-        }
-      );
+  useEffect(() => {
+    const confirmDonation = async () => {
+      try {
+        const response = await fetch(
+          `https://placeofkindness-server.herokuapp.com/api/v1/donations/create-donations/?usertoken=${param1}&amount=${param2}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: bearer,
+            },
+          }
+        );
 
-      const responseData = await response.json();
-      if (!response.ok) {
-        console.log(response);
-        alert(responseData.message);
-        throw new Error(responseData.message);
+        const responseData = await response.json();
+        if (!response.ok) {
+          console.log(response);
+          alert(responseData.message);
+          throw new Error(responseData.message);
+        }
+        alert("Donation Send Sucessfully Sucessfully!!!!");
+        setDonationRespData(responseData.donation);
+        console.log(responseData.donation);
+      } catch (err) {
+        console.log(err);
       }
-      alert("Donation Send Sucessfully Sucessfully!!!!");
-      setDonationRespData(responseData.donation);
-      console.log(responseData.donation);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    };
+
+    confirmDonation();
+  }, []);
 
   return (
     <Container>
@@ -84,9 +87,7 @@ const DDonate = () => {
           </Button>
         </Form>
       </Row>
-      <Button variant="primary" onClick={confirmDonation}>
-        View Transactions
-      </Button>
+      <Button variant="primary">View Transactions</Button>
       <Row className="mt-4">
         <Table striped bordered hover variant="dark">
           <thead>
