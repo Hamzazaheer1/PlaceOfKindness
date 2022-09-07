@@ -68,23 +68,23 @@ const NeedyDash = () => {
     }
   };
 
-  const getProfile = async () => {
-    const response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/users/getme",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      }
-    );
-    const responseData = await response.json();
-    setRespData(responseData.data.requests);
-  };
-
   useEffect(() => {
+    const getProfile = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/users/getme",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setRespData(responseData.data.requests);
+    };
+
     getProfile();
-  }, []);
+  }, [bearer]);
 
   return (
     <div>
@@ -132,8 +132,8 @@ const NeedyDash = () => {
         <br />
         <h2>List of Requests</h2>
         {respData ? (
-          respData.map((item) => (
-            <Alert variant={"dark"}>
+          respData.map((item, index) => (
+            <Alert variant={"dark"} key={index + 1}>
               <b>{item.title}</b>
               <p>{item.description}</p>
               <p>{item.amount}</p>

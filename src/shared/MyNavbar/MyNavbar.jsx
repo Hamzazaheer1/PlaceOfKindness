@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MyNavbar.css";
-// import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-//import NavDropdown from "react-bootstrap/NavDropdown";
 
 const MyNavbar = (user) => {
   let x;
@@ -79,70 +76,6 @@ const MyNavbar = (user) => {
         </Navbar.Collapse>
       </Navbar>
     </div>
-    // <nav>
-    //   <div className="logo">
-    //     <Link
-    //       style={{
-    //         color: "#0092dd",
-    //         fontSize: "30px",
-    //         fontWeight: "600",
-    //         letterSpacing: "-1px",
-    //         textDecoration: "none",
-    //       }}
-    //       to="/"
-    //     >
-    //       PlaceOfKindness
-    //     </Link>
-    //   </div>
-    //   <div className="nav-items">
-    //     <li>
-    //       <Link to="/needy">Needy</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/forum">Forum</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/request">Request</Link>
-    //     </li>
-    //     {user.user && x === "donator" && (
-    //       <li>
-    //         <Link to="/donordash">DonorDash</Link>
-    //       </li>
-    //     )}
-    //     {user.user && x === "needy" && (
-    //       <li>
-    //         <Link to="/needydash">NeedyDash</Link>
-    //       </li>
-    //     )}
-    //     {user.user && x === "token" && (
-    //       <li>
-    //         <Link to="/admindash">AdminDash</Link>
-    //       </li>
-    //     )}
-    //   </div>
-    //   <div className="nav-items" style={{ paddingLeft: "55rem" }}>
-    //     {!user.user && (
-    //       <li>
-    //         <Link to="/login">Sign in</Link>
-    //       </li>
-    //     )}
-    //     {!user.user && (
-    //       <li>
-    //         <Link to="/signupdash">Sign up</Link>
-    //       </li>
-    //     )}
-    //     {user.user && (
-    //       <li>
-    //         <Link to="/userprofile">Profile</Link>
-    //       </li>
-    //     )}
-    //     {user.user && (
-    //       <li>
-    //         <Link to="/logout">Logout</Link>
-    //       </li>
-    //     )}
-    //   </div>
-    // </nav>
   );
 };
 

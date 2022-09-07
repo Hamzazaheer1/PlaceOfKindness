@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-//import "./Donated.css";
+import { Container, Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -16,8 +15,6 @@ const Donated = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-  const [empty, setEmpty] = useState("No data Found");
-  let count = 0;
 
   useEffect(() => {
     const getItems = async () => {
@@ -132,8 +129,8 @@ const Donated = () => {
         <h1>List of Donated Items</h1>
         <Row>
           {itemdata &&
-            itemdata.map((item) => (
-              <>
+            itemdata.map((item, index) => (
+              <div key={index + 1}>
                 {!item.given && item.available && (
                   <Card
                     style={{
@@ -143,6 +140,7 @@ const Donated = () => {
                       marginRight: "1rem",
                     }}
                     bg={"dark"}
+                    key={index + 1}
                   >
                     <Card.Img
                       variant="top"
@@ -171,61 +169,11 @@ const Donated = () => {
                     </Card.Body>
                   </Card>
                 )}
-              </>
+              </div>
             ))}
         </Row>
       </Container>
     </div>
-    // <div>
-    //   <h1>Enter Details below to get specific item</h1>
-    //   <p>Click on Select Item before clicking get Donation</p>
-    //   <div>
-    //     <h5>{<img src={image} alt="notFound"></img>}</h5>
-    //     <h5>{name}</h5>
-    //     <h5>{category}</h5>
-    //   </div>
-    //   {RespData && RespData.role === "needy" && (
-    //     <form>
-    //       <label>
-    //         Enter your Shipping Address:
-    //         <input
-    //           type="text"
-    //           required
-    //           onChange={(e) => setAddress(e.target.value)}
-    //         />
-    //       </label>
-    //       <button onClick={getDonationHandler}>Get Donation</button>
-    //     </form>
-    //   )}
-
-    //   <h1>List of Donated Items</h1>
-    //   {itemdata &&
-    //     itemdata.map((item) => (
-    //       <div>
-    //         {item.given && item.available && (
-    //           <div>
-    //             <h5>{<img src={item.photo} alt="notFound" />}</h5>
-    //             <h5>{item.name}</h5>
-    //             <h5>{item.category}</h5>
-    //             <h5>{item.user[0].name}</h5>
-    //             <p
-    //               onClick={() => {
-    //                 dataHandler(item.id, item.photo, item.name, item.category);
-    //               }}
-    //               style={{
-    //                 boarder: "solid",
-    //                 backgroundColor: "grey",
-    //                 color: "white",
-    //                 width: "8vw",
-    //               }}
-    //             >
-    //               Select Item
-    //             </p>
-    //           </div>
-    //         )}
-    //       </div>
-    //     ))}
-    // </div>
   );
 };
 

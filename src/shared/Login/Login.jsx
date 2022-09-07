@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import DonarDash from "../../User/Dashboards/DonarDash";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./Login.css";
-import Alert from "react-bootstrap/Alert";
+
 const Login = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -98,42 +96,6 @@ const Login = () => {
         <Col></Col>
       </Row>
     </Container>
-    // <React.Fragment>
-    //   <div className="login-div">
-    //     <div className="main_div">
-    //       <div className="login-box">
-    //         <h1>Sign in Here</h1>
-    //         <form method="" action="">
-    //           <div className="inputBox">
-    //             <label>username</label>
-    //             <input
-    //               type="text"
-    //               name="username"
-    //               autoComplete="off"
-    //               required
-    //               onChange={(e) => setUsername(e.target.value)}
-    //             />
-    //           </div>
-    //           <div className="inputBox">
-    //             <label>password</label>
-    //             <input
-    //               type="password"
-    //               name="password"
-    //               autoComplete="off"
-    //               required
-    //               onChange={(e) => setPassword(e.target.value)}
-    //             />
-    //           </div>
-    //         </form>
-    //         <button onClick={authSubmitHandler}>Sign in</button>
-    //         <p style={{ color: "white" }} onClick={forgotHandler}>
-    //           Forgot Password
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <br />
-    // </React.Fragment>
   );
 };
 

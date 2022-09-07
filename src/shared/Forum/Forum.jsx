@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Children } from "react";
-import ForumComment from "./ForumComment";
-import Alert from "react-bootstrap/Alert";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import ForumComment from "./ForumComment";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
+
 const Forum = () => {
   let jwt;
   if (localStorage.donator) {
@@ -19,17 +20,15 @@ const Forum = () => {
   const [thread, setThread] = useState("");
   const [threadDesc, setThreadDesc] = useState("");
 
-  let response;
-  let responseData;
-  const getItems = async () => {
-    response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/posts/"
-    );
-    responseData = await response.json();
-    setItemData(responseData.data);
-  };
-
   useEffect(() => {
+    const getItems = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/posts/"
+      );
+      const responseData = await response.json();
+      setItemData(responseData.data);
+    };
+
     getItems();
   }, []);
 
@@ -95,7 +94,9 @@ const Forum = () => {
                     placeholder={"Enter Desc"}
                   />
                 </Form.Group>
-                <Button variant="dark">Post a Thread</Button>
+                <Button variant="dark" onClick={commentPostHandler}>
+                  Post a Thread
+                </Button>
               </Form>
             ) : (
               <h5>You Need to be loged in to post a thread....</h5>
@@ -116,9 +117,7 @@ const Forum = () => {
               <Button
                 variant="dark"
                 onClick={() => {
-                  {
-                    itemidHandler(item.id, item.title);
-                  }
+                  itemidHandler(item.id, item.title);
                 }}
               >
                 Show Comments
@@ -127,55 +126,6 @@ const Forum = () => {
           ))}
       </Container>
     </Container>
-    // <div style={{ marginLeft: "2rem", marginTop: "1rem" }}>
-    //   <h1>Forum</h1>
-    //   <div>
-    //     <br />
-    //     <br />
-    //     {jwt && (
-    //       <div>
-    //         <h2>Create New Thread</h2>
-    //         <form>
-    //           <input
-    //             type="text"
-    //             required
-    //             onChange={(e) => setThread(e.target.value)}
-    //             placeholder={"Enter your thought..."}
-    //             style={{ width: "50rem" }}
-    //           />
-    //           <br />
-    //           <input
-    //             type="text"
-    //             required
-    //             onChange={(e) => setThreadDesc(e.target.value)}
-    //             placeholder={"Enter Desc"}
-    //             style={{ width: "50rem" }}
-    //           />
-    //           <br />
-    //           <button onClick={commentPostHandler}>Submit</button>
-    //         </form>
-    //       </div>
-    //     )}
-    //   </div>
-
-    //   <div style={{ border: "solid", marginTop: "2rem" }}>
-    //     {itemData.map((item) => (
-    //       <div key={item.id}>
-    //         <p>{item.user[0].name}</p>
-    //         <h3
-    //           onClick={() => {
-    //             {
-    //               itemidHandler(item.id, item.title);
-    //             }
-    //           }}
-    //         >
-    //           {item.title}
-    //         </h3>
-    //         <p>{item.description}</p>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
   );
 };
 

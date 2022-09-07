@@ -46,8 +46,8 @@ const DonationList = () => {
     <Container>
       <h1>Requested Donations by Needy</h1>
       {itemData ? (
-        itemData.map((item) => (
-          <Alert variant={"dark"}>
+        itemData.map((item, index) => (
+          <Alert key={index + 1} variant={"dark"}>
             <h3>{item.title}</h3>
             <p>{item.amount}</p>
             <p>{item.createdAt}</p>
@@ -67,39 +67,6 @@ const DonationList = () => {
         <p>No data to be found</p>
       )}
     </Container>
-    // <div>
-    //   <h1>Admin Dashboard</h1>
-    //   <h3>List of Requested Donations by Needy</h3>
-
-    //   <div>
-    //     {itemData ? (
-    //       itemData.map((item) => (
-    //         <div style={{ border: "solid" }} key={item.id}>
-    //           <p>{item.title}</p>
-    //           <p>{item.amount}</p>
-    //           <p>{item.createdAt}</p>
-    //           <p>{item.paymentacc}</p>
-    //           <p>{item.user[0].name}</p>
-    //           <p
-    //             onClick={() => {
-    //               reqDeleteHandler(item.id);
-    //             }}
-    //             style={{
-    //               boarder: "solid",
-    //               backgroundColor: "grey",
-    //               color: "white",
-    //               width: "3vw",
-    //             }}
-    //           >
-    //             Delete
-    //           </p>
-    //         </div>
-    //       ))
-    //     ) : (
-    //       <p>No data to be found</p>
-    //     )}
-    //   </div>
-    // </div>
   );
 };
 

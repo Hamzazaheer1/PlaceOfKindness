@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Container, Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-// import ListGroup from "react-bootstrap/ListGroup";
+
 const UsersList = () => {
   let jwt;
   if (localStorage.token) {
@@ -88,7 +88,7 @@ const UsersList = () => {
   return (
     <Container>
       <Row>
-        <Col md-5>
+        <Col md={5}>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>
@@ -106,13 +106,14 @@ const UsersList = () => {
             </Button>
           </Form>
         </Col>
-        <Col md-7></Col>
+        <Col md={7}></Col>
       </Row>
       <Row>
         <h2>Users List</h2>
         {respData &&
-          respData.map((item) => (
+          respData.map((item, index) => (
             <Card
+              key={index + 1}
               bg={"dark"}
               style={{
                 width: "18rem",
@@ -159,67 +160,6 @@ const UsersList = () => {
           ))}
       </Row>
     </Container>
-    // <div>
-    //   <h1>Update User Role</h1>
-    //   <div>
-    //     <form>
-    //       <input
-    //         type="text"
-    //         required
-    //         onChange={(e) => setUserRole(e.target.value)}
-    //         placeholder={"UserRole"}
-    //         value={userRole}
-    //       />
-    //       <br />
-    //       <button onClick={userUpdateHandler}>Update</button>
-    //     </form>
-    //   </div>
-    //   <h1>Users List</h1>
-    //   {respData &&
-    //     respData.map((item) => (
-    //       <div style={{ border: "solid", width: "50vw", marginBottom: "1rem" }}>
-    //         <img
-    //           src={item.photo}
-    //           alt={"this user image is not working"}
-    //           width="100px"
-    //         />
-    //         <p>{item.name}</p>
-    //         <p>{item.email}</p>
-    //         <p>{item.username}</p>
-    //         <p>{item.cnic}</p>
-    //         <p>{item.role}</p>
-    //         <div style={{ display: "flex" }}>
-    //           <p
-    //             onClick={() => {
-    //               updateRoleId(item.id, item.role);
-    //             }}
-    //             style={{
-    //               boarder: "solid",
-    //               backgroundColor: "grey",
-    //               color: "white",
-    //               width: "3vw",
-    //             }}
-    //           >
-    //             Update
-    //           </p>
-    //           <p>&nbsp;&nbsp;</p>
-    //           <p
-    //             onClick={() => {
-    //               userDeleteHandler(item.id);
-    //             }}
-    //             style={{
-    //               boarder: "solid",
-    //               backgroundColor: "grey",
-    //               color: "white",
-    //               width: "3vw",
-    //             }}
-    //           >
-    //             Delete
-    //           </p>
-    //         </div>
-    //       </div>
-    //     ))}
-    // </div>
   );
 };
 

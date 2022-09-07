@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Col, Row, Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { Col, Row, Container } from "react-bootstrap";
 
 const SignupDash = () => {
   const navigate = useNavigate();
@@ -41,24 +41,6 @@ const SignupDash = () => {
         </Col>
       </Row>
     </Container>
-    // <div>
-    //   <h1>Welcome to Signup Page</h1>
-    //   <h2>Whome would you like to signup as...</h2>
-    //   <button
-    //     onClick={() => {
-    //       navigate("/signup");
-    //     }}
-    //   >
-    //     Donor
-    //   </button>
-    //   <button
-    //     onClick={() => {
-    //       navigate("/needysignup");
-    //     }}
-    //   >
-    //     Needy
-    //   </button>
-    // </div>
   );
 };
 

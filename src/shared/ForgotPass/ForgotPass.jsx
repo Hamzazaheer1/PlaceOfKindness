@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Container, Row, Col } from "react-bootstrap";
 
 const ForgotPass = () => {
   const [email, setEmail] = useState("");
@@ -29,18 +32,35 @@ const ForgotPass = () => {
   };
 
   return (
-    <div>
-      <h1>Forgot Pass</h1>
-      <form>
-        <p>Enter email</p>
-        <input
-          type="text"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </form>
-      <button onClick={submitHandler}>Reset Password</button>
-    </div>
+    <Container>
+      <Row className="mt-5">
+        <Col md-4></Col>
+        <Col md-4>
+          <h1>Forgot Password</h1>
+          <br />
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                Enter the registered Email and reset Password link will be sent
+                to your Email.
+              </Form.Text>
+            </Form.Group>
+            <Button variant="dark" onClick={submitHandler}>
+              Reset Password
+            </Button>
+          </Form>
+        </Col>
+        <Col md-4></Col>
+      </Row>
+    </Container>
   );
 };
 

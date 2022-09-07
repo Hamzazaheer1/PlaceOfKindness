@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
+import { AuthContext } from "./shared/ProtectedRoute/ProtectedRoute";
 import setAuthToken from "./utils/setAuthToken";
 import MyNavbar from "./shared/MyNavbar/MyNavbar";
 import Homepage from "./shared/Homepage/Homepage";
@@ -12,18 +13,15 @@ import Signup from "./shared/Signup/Signup";
 import NeedySignup from "./shared/NeedySignup/NeedySignup";
 import Footer from "./shared/Footer/Footer";
 import AdminDash from "./Admin/AdminDash/AdminDash";
-import { AuthContext } from "./shared/ProtectedRoute/ProtectedRoute";
 import SignupDash from "./shared/SignupDash/SignupDash";
 import Donated from "./shared/Request/ReqComponents/Donated";
 import RequestDona from "./shared/Request/ReqComponents/RequestDona";
-import GetDonation from "./shared/Request/ReqComponents/GetDonation/GetDonation";
 import ForumComment from "./shared/Forum/ForumComment";
 import Logout from "./shared/Logout/Logout";
 import NotFoundComponent from "./shared/ComponentNotFound/NotFoundComponent";
 import UserProfile from "./User/UserProfile/UserProfile";
 import Needy from "./shared/Needy/Needy";
 import DonarDash from "./User/Dashboards/DonarDash";
-// import NeedyDash from "./User/Dashboards/NeedyDash";
 import ForgotPass from "./shared/ForgotPass/ForgotPass";
 import ChangePass from "./shared/ForgotPass/ChangePass";
 import NeedyDashbord from "./User/Dashboards/NeedyDashbord";
@@ -67,7 +65,6 @@ function App() {
       <React.Fragment>
         <Route path="/admindash" element={<AdminDash />} />
         <Route path="/donordash" element={<DonarDash />} />
-        {/* <Route path="/donordash/donate" element={<DDonate />} /> */}
         <Route path="/needydash" element={<NeedyDashbord />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/userprofile" element={<UserProfile />} />
@@ -100,15 +97,10 @@ function App() {
               <Route path="/request" element={<Request />} />
               <Route path="/donateditems" element={<Donated />} />
               <Route path="/reqdonation" element={<RequestDona />} />
-              <Route path="/getdonation" element={<GetDonation />} />
               <Route path="/forumcomments" element={<ForumComment />} />
               <Route path="/forgotpass" element={<ForgotPass />} />
               <Route path="/changepass/:token" element={<ChangePass />} />
               {routes}
-              {/* <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/admindash" element={<AdminDash />} />
-            <Route path="/userdash" element={<UserDash />} /> */}
             </Routes>
           </div>
           <Footer />

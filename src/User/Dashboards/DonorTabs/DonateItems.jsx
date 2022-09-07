@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
-import { Card } from "react-bootstrap";
 
 const DonateItems = () => {
   let token;
@@ -41,7 +39,6 @@ const DonateItems = () => {
     formData.append("name", name);
     formData.append("category", category);
     formData.append("photo", image);
-    console.log(formData);
     try {
       const response = await fetch(
         "https://placeofkindness-server.herokuapp.com/api/v1/items/createItem",
@@ -66,23 +63,23 @@ const DonateItems = () => {
     }
   };
 
-  const getProfile = async () => {
-    const response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/users/getme",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      }
-    );
-    const responseData = await response.json();
-    setRespData(responseData.data.items);
-  };
-
   useEffect(() => {
+    const getProfile = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/users/getme",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setRespData(responseData.data.items);
+    };
+
     getProfile();
-  }, []);
+  }, [bearer]);
 
   return (
     <Container>
@@ -126,8 +123,9 @@ const DonateItems = () => {
           <h2>Donated Iteams</h2>
           <Row>
             {respData ? (
-              respData.map((item) => (
+              respData.map((item, index) => (
                 <Card
+                  key={index + 1}
                   bg={"dark"}
                   style={{
                     width: "15rem",

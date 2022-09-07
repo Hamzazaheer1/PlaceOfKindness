@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const ChangePass = () => {
   const [password, setPassword] = useState("");
@@ -34,26 +37,39 @@ const ChangePass = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Enter your New Password</h1>
-        <form>
-          <p>Password</p>
-          <input
-            type="text"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <p>Password Confirm</p>
-          <input
-            type="text"
-            required
-            onChange={(e) => setPasswordcnfm(e.target.value)}
-          />
-        </form>
-        <button onClick={submitHandler}>Reset Password</button>
-      </div>
-    </div>
+    <Container>
+      <Row className="mt-5">
+        <Col md-4></Col>
+        <Col md-4>
+          <h1>Enter your New Password</h1>
+          <br />
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                type="password"
+                placeholder="Enter New Password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Form.Control
+                type="password"
+                placeholder="Password Confirm"
+                required
+                onChange={(e) => setPasswordcnfm(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                Enter the registered Email and reset Password link will be sent
+                to your Email.
+              </Form.Text>
+            </Form.Group>
+            <Button variant="dark" onClick={submitHandler}>
+              Reset Password
+            </Button>
+          </Form>
+        </Col>
+        <Col md-4></Col>
+      </Row>
+    </Container>
   );
 };
 

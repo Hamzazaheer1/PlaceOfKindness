@@ -72,11 +72,11 @@ const APurchases = () => {
     <Container>
       <h1>Users Purchases</h1>
       <Row>
-        <Col md-5>
+        <Col md={5}>
           <h2>All Items</h2>
           {respData ? (
-            respData.map((item) => (
-              <Alert variant={"dark"}>
+            respData.map((item, index) => (
+              <Alert key={index + 1} variant={"dark"}>
                 <p>{item.shipaddress}</p>
                 <p>{item.createdAt}</p>
                 {item.shipped ? <p>Shipped</p> : <p>Not Shipped</p>}
@@ -96,14 +96,14 @@ const APurchases = () => {
             <p>No data to be found</p>
           )}
         </Col>
-        <Col md-2></Col>
-        <Col md-5>
+        <Col md={2}></Col>
+        <Col md={5}>
           <h2>UnShipped Items</h2>
           {unRespData ? (
-            unRespData.map((item) => (
-              <Alert variant={"dark"}>
-                {item.item.map((i) => (
-                  <h5>{i}</h5>
+            unRespData.map((item, index) => (
+              <Alert key={index + 1} variant={"dark"}>
+                {item.item.map((i, key) => (
+                  <h5 key={key + 1}>{i}</h5>
                 ))}
                 <p>{item.shipaddress}</p>
                 {item.shipped ? <p>Shipped</p> : <p>Not Shipped</p>}
@@ -125,42 +125,6 @@ const APurchases = () => {
         </Col>
       </Row>
     </Container>
-    // <div>
-    //   <h1>Admin Purchases Panel</h1>
-    //   <br />
-    //   <h1>UnShipped Items</h1>
-    //   {console.log(respData)}
-    //   {respData ? (
-    //     respData.map((item) => (
-    //       <div style={{ border: "solid" }}>
-    //         {item.item.map((i) => (
-    //           <h5>{i}</h5>
-    //         ))}
-    //         <h5>{item.shipaddress}</h5>
-    //         {item.shipped ? <h5>Shipped</h5> : <h5>Not Shipped</h5>}
-    //         <h5>{item.user[0]}</h5>
-    //         <h5>{item.createdAt}</h5>
-    //         <div style={{ display: "flex" }}>
-    //           <p
-    //             onClick={() => {
-    //               commentUpdateHandler(item._id);
-    //             }}
-    //             style={{
-    //               boarder: "solid",
-    //               backgroundColor: "grey",
-    //               color: "white",
-    //               width: "3vw",
-    //             }}
-    //           >
-    //             Update
-    //           </p>
-    //         </div>
-    //       </div>
-    //     ))
-    //   ) : (
-    //     <h5>no data found</h5>
-    //   )}
-    // </div>
   );
 };
 

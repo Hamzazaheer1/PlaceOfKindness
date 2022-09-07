@@ -10,25 +10,24 @@ const AComment = () => {
   const bearer = "Bearer " + jwt;
 
   const [respData, setRespData] = useState([]);
-  let response;
-  let responseData;
-  const getDonors = async () => {
-    response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/comments/",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      }
-    );
-    responseData = await response.json();
-    setRespData(responseData.data);
-  };
 
   useEffect(() => {
+    const getDonors = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/comments/",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: bearer,
+          },
+        }
+      );
+      const responseData = await response.json();
+      setRespData(responseData.data);
+    };
+
     getDonors();
-  }, []);
+  }, [bearer]);
 
   const postDeleteHandler = async (x) => {
     try {
@@ -54,8 +53,8 @@ const AComment = () => {
     <Container>
       <h1>Users Comments</h1>
       {respData ? (
-        respData.map((item) => (
-          <Alert variant={"dark"}>
+        respData.map((item, index) => (
+          <Alert key={index + 1} variant={"dark"}>
             <h5>{item.comment}</h5>
             <p>{item.user[0].name}</p>
             <p>{item.createdAt}</p>
@@ -73,34 +72,6 @@ const AComment = () => {
         <p>No data to be found</p>
       )}
     </Container>
-    // <div>
-    //   <h1>Admin Comment Panel</h1>
-    //   <br />
-    //   <h1>Comments</h1>
-    //   {respData &&
-    //     respData.map((item) => (
-    //       <div style={{ border: "solid" }}>
-    //         <h5>{item.comment}</h5>
-    //         <h5>{item.user[0].name}</h5>
-    //         <h5>{item.createdAt}</h5>
-    //         <div style={{ display: "flex" }}>
-    //           <p
-    //             onClick={() => {
-    //               postDeleteHandler(item.id);
-    //             }}
-    //             style={{
-    //               boarder: "solid",
-    //               backgroundColor: "grey",
-    //               color: "white",
-    //               width: "3vw",
-    //             }}
-    //           >
-    //             Delete
-    //           </p>
-    //         </div>
-    //       </div>
-    //     ))}
-    // </div>
   );
 };
 

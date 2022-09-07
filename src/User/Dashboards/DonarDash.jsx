@@ -6,7 +6,7 @@ import DonateItems from "./DonorTabs/DonateItems";
 const DonarDash = () => {
   return (
     <Tabs
-      defaultActiveKey="donate"
+      defaultActiveKey="items"
       id="uncontrolled-tab-example"
       className="mb-3"
     >

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
-import { Card } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Container, Row, Card, Button } from "react-bootstrap";
 
 const NeedyUsers = () => {
   let jwt;
@@ -59,8 +57,9 @@ const NeedyUsers = () => {
       <h2>Unvarified Needy Users</h2>
       <Row className="mt-2">
         {respData &&
-          respData.map((item) => (
+          respData.map((item, index) => (
             <Card
+              key={index + 1}
               bg={"dark"}
               style={{
                 width: "18rem",
@@ -95,35 +94,6 @@ const NeedyUsers = () => {
           ))}
       </Row>
     </Container>
-    // <div>
-    //   <h1>List of Unvarified Needy Users</h1>
-    //   {respData &&
-    //     respData.map((item) => (
-    //       <div style={{ border: "solid" }}>
-    //         <p>{item.name}</p>
-    //         <p>{item.email}</p>
-    //         <p>{item.username}</p>
-    //         <p>{item.cnic}</p>
-    //         <p>{item.temprole}</p>
-    //         <p>{item.role}</p>
-    //         <p>{item.requestlimit}</p>
-    //         <p>{item.donated}</p>
-    //         <p
-    //           onClick={() => {
-    //             userUpdateHandler(item._id);
-    //           }}
-    //           style={{
-    //             boarder: "solid",
-    //             backgroundColor: "grey",
-    //             color: "white",
-    //             width: "8vw",
-    //           }}
-    //         >
-    //           Update Needy Role
-    //         </p>
-    //       </div>
-    //     ))}
-    // </div>
   );
 };
 

@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./TopDonations.css";
 import Table from "react-bootstrap/Table";
 
 const TopDonations = () => {
   const [data, setData] = useState([]);
-  let response;
-  let responseData;
-  const getDonors = async () => {
-    response = await fetch(
-      "https://placeofkindness-server.herokuapp.com/api/v1/donations/top5don"
-    );
-    responseData = await response.json();
-    setData(responseData.users);
-  };
 
   useEffect(() => {
+    const getDonors = async () => {
+      const response = await fetch(
+        "https://placeofkindness-server.herokuapp.com/api/v1/donations/top5don"
+      );
+      const responseData = await response.json();
+      setData(responseData.users);
+    };
+
     getDonors();
   }, []);
 
@@ -45,10 +43,15 @@ const TopDonations = () => {
           </thead>
           <tbody>
             {data.map((item, index) => (
-              <tr>
+              <tr key={index + 1}>
                 <td>{index + 1}</td>
                 <td>
-                  <img src={item.photo} width={"50px"} height={"50px"} />
+                  <img
+                    src={item.photo}
+                    alt={"notFound"}
+                    width={"50px"}
+                    height={"50px"}
+                  />
                 </td>
                 <td>{item.Name}</td>
                 <td>
@@ -61,37 +64,6 @@ const TopDonations = () => {
         </Table>
       </div>
     </React.Fragment>
-
-    // <React.Fragment>
-    //   <h2 className="top-donors-h2">Our Top Donations.</h2>
-    //   <div className="donation-container">
-    //     <table>
-    //       <thead>
-    //         <tr>
-    //           <th>Position</th>
-    //           <th>Profile</th>
-    //           <th>Name</th>
-    //           <th>Donation Amount</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {data.map((item, index) => (
-    //           <tr>
-    //             <td>{index + 1}</td>
-    //             <td>
-    //               <img src={item.photo} width={"50px"} height={"50px"} />
-    //             </td>
-    //             <td>{item.Name}</td>
-    //             <td>
-    //               {item.donated}
-    //               <b>pkr</b>
-    //             </td>
-    //           </tr>
-    //         ))}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // </React.Fragment>
   );
 };
 
