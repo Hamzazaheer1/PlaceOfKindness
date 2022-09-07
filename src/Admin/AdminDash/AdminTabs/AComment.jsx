@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Button, Container } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
 
 const AComment = () => {
   let jwt;
@@ -49,34 +51,56 @@ const AComment = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Comment Panel</h1>
-      <br />
-      <h1>Comments</h1>
-      {respData &&
+    <Container>
+      <h1>Users Comments</h1>
+      {respData ? (
         respData.map((item) => (
-          <div style={{ border: "solid" }}>
+          <Alert variant={"dark"}>
             <h5>{item.comment}</h5>
-            <h5>{item.user[0].name}</h5>
-            <h5>{item.createdAt}</h5>
-            <div style={{ display: "flex" }}>
-              <p
-                onClick={() => {
-                  postDeleteHandler(item.id);
-                }}
-                style={{
-                  boarder: "solid",
-                  backgroundColor: "grey",
-                  color: "white",
-                  width: "3vw",
-                }}
-              >
-                Delete
-              </p>
-            </div>
-          </div>
-        ))}
-    </div>
+            <p>{item.user[0].name}</p>
+            <p>{item.createdAt}</p>
+            <Button
+              variant="danger"
+              onClick={() => {
+                postDeleteHandler(item.id);
+              }}
+            >
+              Delete
+            </Button>
+          </Alert>
+        ))
+      ) : (
+        <p>No data to be found</p>
+      )}
+    </Container>
+    // <div>
+    //   <h1>Admin Comment Panel</h1>
+    //   <br />
+    //   <h1>Comments</h1>
+    //   {respData &&
+    //     respData.map((item) => (
+    //       <div style={{ border: "solid" }}>
+    //         <h5>{item.comment}</h5>
+    //         <h5>{item.user[0].name}</h5>
+    //         <h5>{item.createdAt}</h5>
+    //         <div style={{ display: "flex" }}>
+    //           <p
+    //             onClick={() => {
+    //               postDeleteHandler(item.id);
+    //             }}
+    //             style={{
+    //               boarder: "solid",
+    //               backgroundColor: "grey",
+    //               color: "white",
+    //               width: "3vw",
+    //             }}
+    //           >
+    //             Delete
+    //           </p>
+    //         </div>
+    //       </div>
+    //     ))}
+    // </div>
   );
 };
 
