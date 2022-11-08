@@ -80,8 +80,8 @@ const APurchases = () => {
                 <p>{item.shipaddress}</p>
                 <p>{item.createdAt}</p>
                 {item.shipped ? <p>Shipped</p> : <p>Not Shipped</p>}
-                <p>{item.item[0].name}</p>
-                <p>{item.user[0].name}</p>
+                {/* <p>{item.item[0].name}</p>
+                <p>{item.user[0].name}</p> */}
                 <Button
                   variant="primary"
                   onClick={() => {
